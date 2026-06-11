@@ -4,6 +4,7 @@ import { Star, ArrowRight, MessageCircle, BookOpen, Trophy, Users, Sparkles, Gra
 import { Section, Reveal, SectionHeader, Eyebrow } from "@/components/primitives";
 import { Counter, FloatingParticles } from "@/components/Counter";
 import { SITE, COURSES, TESTIMONIALS } from "@/lib/site";
+import { ParallaxCard } from "@/components/ParallaxCard";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -85,22 +86,24 @@ function Home() {
           title={<>A commerce curriculum, <span className="gold-text">crafted with care</span></>}
           subtitle="From your first ledger entry to your B.Com viva — every step planned, every doubt answered."
         />
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 perspective-1000">
           {COURSES.map((c, i) => (
             <Reveal key={c.slug} delay={i * 0.06}>
-              <Link to="/courses/$slug" params={{ slug: c.slug }} className="group block h-full">
-                <div className="h-full rounded-3xl bg-white ring-1 ring-border p-7 hover:shadow-luxe transition-all hover:-translate-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] uppercase tracking-[0.18em] text-luxury">{c.tag}</span>
-                    <GraduationCap className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition" />
+              <ParallaxCard className="h-full rounded-3xl">
+                <Link to="/courses/$slug" params={{ slug: c.slug }} className="group block h-full">
+                  <div className="h-full rounded-3xl bg-white ring-1 ring-border p-7 hover:shadow-luxe transition-all hover:-translate-y-1 hover:ring-luxury/40">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] uppercase tracking-[0.18em] text-luxury">{c.tag}</span>
+                      <GraduationCap className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition" />
+                    </div>
+                    <h3 className="mt-5 font-display text-2xl text-foreground">{c.title}</h3>
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{c.summary}</p>
+                    <div className="mt-6 flex items-center text-sm text-foreground font-medium">
+                      Explore course <ArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition" />
+                    </div>
                   </div>
-                  <h3 className="mt-5 font-display text-2xl text-foreground">{c.title}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{c.summary}</p>
-                  <div className="mt-6 flex items-center text-sm text-foreground font-medium">
-                    Explore course <ArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition" />
-                  </div>
-                </div>
-              </Link>
+                </Link>
+              </ParallaxCard>
             </Reveal>
           ))}
         </div>
