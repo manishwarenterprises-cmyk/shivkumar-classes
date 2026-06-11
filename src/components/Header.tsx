@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
+import ehLogo from "@/assets/eh-logo.png.asset.json";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -17,12 +18,9 @@ export function Header() {
     >
       <div className="mx-auto mt-4 max-w-7xl px-4">
         <div className="glass shadow-soft flex items-center justify-between rounded-2xl px-5 py-3">
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="relative">
-              <div className="h-9 w-9 rounded-xl gradient-luxe grid place-items-center text-white font-display text-lg shadow-luxe">
-                S
-              </div>
-              <div className="absolute -bottom-1 -right-1 h-3 w-3 rounded-full gradient-gold ring-2 ring-white" />
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="h-11 w-11 rounded-full bg-foreground grid place-items-center overflow-hidden ring-1 ring-luxury/40 shadow-luxe">
+              <img src={ehLogo.url} alt="Shiv Sir's Education Hub" className="h-full w-full object-contain" />
             </div>
             <div className="leading-tight">
               <div className="font-display text-base font-semibold text-foreground">

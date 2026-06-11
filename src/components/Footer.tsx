@@ -1,15 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { SITE, NAV, COURSES } from "@/lib/site";
 import { Mail, Phone, MapPin, Instagram, Facebook, Youtube } from "lucide-react";
+import ehLogo from "@/assets/eh-logo.png.asset.json";
+import agencyLogo from "@/assets/manishwarai-logo.jpg.asset.json";
 
 export function Footer() {
   return (
     <footer className="mt-32 gradient-luxe text-white">
       <div className="mx-auto max-w-7xl px-6 py-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2.5">
-            <div className="h-10 w-10 rounded-xl bg-white/10 backdrop-blur grid place-items-center font-display text-lg ring-1 ring-white/20">
-              S
+          <div className="flex items-center gap-3">
+            <div className="h-12 w-12 rounded-full bg-black grid place-items-center overflow-hidden ring-1 ring-luxury/40">
+              <img src={ehLogo.url} alt="Shiv Sir's Education Hub" className="h-full w-full object-contain" />
             </div>
             <div>
               <div className="font-display text-lg">Shiv Sir's</div>
@@ -70,12 +72,25 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
+        <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60">
           <div>© {new Date().getFullYear()} Shiv Sir's Education Hub. All rights reserved.</div>
-          <div>
-            Designed & Developed by{" "}
-            <span className="text-luxury font-medium">{SITE.agency}</span>
-          </div>
+          <a
+            href="#"
+            className="group flex items-center gap-3 rounded-xl bg-white/[0.04] ring-1 ring-white/10 px-3 py-2 hover:bg-white/[0.08] transition"
+          >
+            <div className="h-9 w-12 rounded-md overflow-hidden bg-white grid place-items-center">
+              <img src={agencyLogo.url} alt={SITE.agency} className="h-full w-full object-cover" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-[10px] uppercase tracking-[0.18em] text-white/50">
+                Designed & Developed By
+              </div>
+              <div className="text-sm text-luxury font-medium">{SITE.agency}</div>
+              <div className="text-[9px] uppercase tracking-[0.18em] text-white/40">
+                {SITE.agencyTagline}
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </footer>

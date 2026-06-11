@@ -3,16 +3,18 @@ export const SITE = {
   short: "Shiv Sir's",
   tagline: "Building Future Commerce Leaders Since 2012",
   city: "Nagpur, Maharashtra",
-  phone: "+91 98765 43210",
-  whatsapp: "919876543210",
+  phone: "+91 95116 79065",
+  whatsapp: "919511679065",
   email: "info@shivsirseducationhub.in",
-  address: "Shiv Sir's Education Hub, Nagpur, Maharashtra, India",
+  address:
+    "Balaji Complex, Near Blue Bells Convent School, Above Shree Jewellers, Duttawadi, Wadi, Nagpur, Maharashtra 440023",
   mapsEmbed:
-    "https://www.google.com/maps?q=Nagpur,Maharashtra&output=embed",
+    "https://www.google.com/maps?q=Balaji+Complex+Blue+Bells+Convent+School+Duttawadi+Wadi+Nagpur+440023&output=embed",
   rating: 5.0,
   reviews: 62,
   years: 13,
-  agency: "Manishwar AI Agency",
+  agency: "ManishwarAI Agency",
+  agencyTagline: "Creative | Innovative | Solutions",
 };
 
 export const NAV = [
