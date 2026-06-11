@@ -76,19 +76,21 @@ export function Footer() {
           <div>© {new Date().getFullYear()} Shiv Sir's Education Hub. All rights reserved.</div>
           <a
             href="#"
-            className="group flex items-center gap-3 rounded-xl bg-white/[0.04] ring-1 ring-white/10 px-3 py-2 hover:bg-white/[0.08] transition"
+            className="group flex items-center gap-3 rounded-xl bg-white/[0.04] ring-1 ring-white/10 px-4 py-2.5 hover:bg-white/[0.08] hover:ring-luxury/30 transition"
           >
-            <div className="h-9 w-12 rounded-md overflow-hidden bg-white grid place-items-center">
-              <img src={agencyLogo.url} alt={SITE.agency} className="h-full w-full object-cover" />
-            </div>
-            <div className="leading-tight">
+            <div className="leading-tight text-right">
               <div className="text-[10px] uppercase tracking-[0.18em] text-white/50">
                 Designed & Developed By
               </div>
               <div className="text-sm text-luxury font-medium">{SITE.agency}</div>
-              <div className="text-[9px] uppercase tracking-[0.18em] text-white/40">
-                {SITE.agencyTagline}
-              </div>
+            </div>
+            <div className="h-10 w-10 grid place-items-center">
+              <img
+                src={agencyLogo.url}
+                alt={SITE.agency}
+                className="h-full w-full object-contain"
+                style={{ mixBlendMode: "screen", filter: "invert(1) brightness(1.15) contrast(1.1)" }}
+              />
             </div>
           </a>
         </div>

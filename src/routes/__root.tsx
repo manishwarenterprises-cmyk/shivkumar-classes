@@ -17,6 +17,7 @@ import { AIAssistant } from "@/components/AIAssistant";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { BackToTop } from "@/components/BackToTop";
 import { PageTransition } from "@/components/PageTransition";
+import { LiftIntro } from "@/components/LiftIntro";
 
 function NotFoundComponent() {
   return (
@@ -116,6 +117,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      <LiftIntro />
       <ScrollProgress />
       <Header />
       <main className="pt-24">

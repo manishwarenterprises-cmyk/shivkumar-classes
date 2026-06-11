@@ -140,3 +140,19 @@
   background-size: 200% 100%;
   animation: shimmer 2.4s linear infinite;
 }
+
+@keyframes neon-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(198,169,105,0.35), 0 0 32px rgba(198,169,105,0.15); }
+  50% { box-shadow: 0 0 24px rgba(198,169,105,0.55), 0 0 56px rgba(198,169,105,0.25); }
+}
+@utility neon-gold { animation: neon-pulse 3.5s ease-in-out infinite; }
+
+@keyframes aurora {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.55; }
+  50% { transform: translate3d(2%, -2%, 0) scale(1.1); opacity: 0.85; }
+}
+@utility animate-aurora { animation: aurora 14s ease-in-out infinite; }
+
+@utility perspective-1000 { perspective: 1000px; }
+@utility preserve-3d { transform-style: preserve-3d; }
+
