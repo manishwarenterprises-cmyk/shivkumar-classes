@@ -50,11 +50,12 @@ function About() {
             >
               <div className="absolute -inset-6 rounded-[2.5rem] gradient-lavender opacity-30 blur-2xl" />
               <div className="relative aspect-[4/5] rounded-[2rem] bg-white ring-1 ring-border shadow-luxe overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-[oklch(0.95_0.04_300)]" />
+                <div className="absolute inset-0 bg-white" />
                 <motion.img
                   src={shivSir.url}
                   alt="Shiv Sir — Founder & Mentor"
                   className="absolute inset-0 h-full w-full object-cover object-top"
+                  style={{ mixBlendMode: "multiply" }}
                   initial={{ scale: 1.05 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
