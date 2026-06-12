@@ -247,6 +247,41 @@ function Home() {
         </div>
       </Section>
 
+      {/* VISIT / MAP */}
+      <Section>
+        <SectionHeader eyebrow="Visit Us" title={<>Drop by the <span className="gold-text">classroom</span></>} subtitle="Centrally located in Duttawadi, Wadi — easy to reach from every commerce school in Nagpur." />
+        <div className="mt-12 grid lg:grid-cols-5 gap-6">
+          <Reveal className="lg:col-span-2">
+            <div className="h-full rounded-3xl gradient-luxe text-white p-8 shadow-luxe">
+              <h3 className="font-display text-2xl">Shiv Sir's Education Hub</h3>
+              <div className="mt-6 space-y-4 text-sm">
+                <div className="flex items-start gap-3"><MapPin className="h-5 w-5 text-luxury mt-0.5 shrink-0"/><span className="text-white/80 leading-relaxed">{SITE.address}</span></div>
+                <a href={`tel:${SITE.phone}`} className="flex items-center gap-3 hover:text-luxury transition"><Phone className="h-5 w-5 text-luxury"/>{SITE.phone}</a>
+                <a href={`https://wa.me/${SITE.whatsapp}`} className="flex items-center gap-3 hover:text-luxury transition"><MessageCircle className="h-5 w-5 text-luxury"/>Chat on WhatsApp</a>
+              </div>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=Balaji+Complex+Blue+Bells+Convent+School+Duttawadi+Wadi+Nagpur+440023"
+                target="_blank" rel="noreferrer"
+                className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-luxury text-luxury-foreground px-5 py-3 text-sm font-medium"
+              >
+                Get directions <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </Reveal>
+          <Reveal className="lg:col-span-3" delay={0.1}>
+            <div className="rounded-3xl overflow-hidden ring-1 ring-border shadow-luxe aspect-[16/11] lg:aspect-auto lg:h-full bg-white">
+              <iframe
+                src={SITE.mapsEmbed}
+                className="w-full h-full"
+                loading="lazy"
+                title="Shiv Sir's Education Hub Location"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
       {/* FINAL CTA */}
       <Section>
         <Reveal>
