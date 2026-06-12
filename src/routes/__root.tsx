@@ -18,6 +18,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { BackToTop } from "@/components/BackToTop";
 import { PageTransition } from "@/components/PageTransition";
 import { LiftIntro } from "@/components/LiftIntro";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 function NotFoundComponent() {
   return (
@@ -128,6 +129,7 @@ function RootComponent() {
       <Footer />
       <AIAssistant />
       <BackToTop />
+      <FloatingWhatsApp />
     </QueryClientProvider>
   );
 }
