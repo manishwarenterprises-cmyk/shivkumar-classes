@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Section, SectionHeader, Reveal } from "@/components/primitives";
 import { Counter } from "@/components/Counter";
 import { motion } from "framer-motion";
-import { Heart, Target, Eye, BookOpen } from "lucide-react";
+import { Heart, Target, Eye, BookOpen, Award, GraduationCap, Sparkles } from "lucide-react";
+import shivSir from "@/assets/shiv-sir.png.asset.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -40,34 +41,65 @@ function About() {
       <Section className="!pt-0">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
-            <div className="relative aspect-[4/5] rounded-3xl gradient-luxe overflow-hidden shadow-luxe">
-              <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(circle at 30% 30%, rgba(198,169,105,0.6), transparent 60%)" }} />
-              <div className="absolute inset-0 grid place-items-center">
-                <div className="text-center text-white">
-                  <div className="font-display text-8xl gold-text">Shiv</div>
-                  <div className="text-sm uppercase tracking-[0.3em] text-white/70 mt-2">Founder & Mentor</div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="relative"
+            >
+              <div className="absolute -inset-6 rounded-[2.5rem] gradient-lavender opacity-30 blur-2xl" />
+              <div className="relative aspect-[4/5] rounded-[2rem] bg-white ring-1 ring-border shadow-luxe overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-[oklch(0.95_0.04_300)]" />
+                <motion.img
+                  src={shivSir.url}
+                  alt="Shiv Sir — Founder & Mentor"
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                  initial={{ scale: 1.05 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.4, ease: "easeOut" }}
+                />
+                <div className="absolute top-5 left-5 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur ring-1 ring-luxury/30 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-foreground shadow-soft">
+                  <Sparkles className="h-3 w-3 text-luxury" /> Founder & Mentor
+                </div>
+                <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border p-4 shadow-soft">
+                  <p className="text-sm text-foreground italic leading-relaxed">"Commerce isn't about memorising — it's about understanding how the world really works."</p>
+                  <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-luxury">— Shiv Sir</div>
                 </div>
               </div>
-              <div className="absolute bottom-6 left-6 right-6 glass-dark rounded-2xl p-4">
-                <p className="text-white text-sm italic">"Commerce isn't about memorising — it's about understanding how the world really works."</p>
-              </div>
-            </div>
+            </motion.div>
           </Reveal>
           <Reveal delay={0.1}>
             <div>
-              <h3 className="font-display text-3xl md:text-4xl text-foreground">The Founder</h3>
+              <div className="inline-flex items-center gap-2 rounded-full bg-white ring-1 ring-border px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-luxury">
+                <Award className="h-3 w-3" /> 13+ Years of Mentoring
+              </div>
+              <h3 className="mt-5 font-display text-4xl md:text-5xl text-foreground">
+                Meet <span className="gold-text">Shiv Sir</span>
+              </h3>
               <p className="mt-5 text-muted-foreground leading-relaxed">
-                Shiv Sir has spent over a decade refining how commerce should be taught — patiently, with depth, and with genuine care for every student who walks in. He left the corporate sector in 2012 to do what he loved most: teach.
+                A commerce educator at heart, Shiv Sir began his journey in 2012 with one simple promise — to teach commerce the way it deserves to be taught: with patience, with depth, and with genuine respect for every student who walks through the door.
               </p>
               <p className="mt-4 text-muted-foreground leading-relaxed">
-                His classes blend rigorous board-pattern preparation with real Indian business stories, making accountancy, economics and business studies feel alive rather than abstract.
+                With a master's in Commerce and over a decade of classroom mastery, he has personally mentored 850+ students — from nervous 11th standard beginners to graduating B.Com toppers. His approach blends rigorous board-pattern preparation with real Indian business stories, making Accountancy, Economics and Business Studies feel alive instead of abstract.
+              </p>
+              <p className="mt-4 text-muted-foreground leading-relaxed">
+                Known across Nagpur for his calm demeanour, sharp doubt-solving and the trust he earns from parents, Shiv Sir has built one of Central India's most respected commerce coaching homes — purely on word of mouth and a perfect 5.0 Google rating.
               </p>
               <div className="mt-8 grid grid-cols-3 gap-4">
-                {[{v:13,s:"+",l:"Years"},{v:850,s:"+",l:"Students"},{v:120,s:"+",l:"90% Scorers"}].map((s)=>(
-                  <div key={s.l}>
-                    <div className="font-display text-3xl gold-text"><Counter to={s.v} suffix={s.s}/></div>
-                    <div className="text-[11px] uppercase tracking-wider text-muted-foreground mt-1">{s.l}</div>
+                {[{v:13,s:"+",l:"Years Teaching"},{v:850,s:"+",l:"Students Mentored"},{v:120,s:"+",l:"90%+ Scorers"}].map((s)=>(
+                  <div key={s.l} className="rounded-2xl bg-white ring-1 ring-border p-4 shadow-soft">
+                    <div className="font-display text-2xl md:text-3xl gold-text"><Counter to={s.v} suffix={s.s}/></div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">{s.l}</div>
                   </div>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {["M.Com Qualified", "13+ Yrs Experience", "5.0 ★ Google", "Calm Classroom", "Personal Mentor"].map(t => (
+                  <span key={t} className="inline-flex items-center gap-1.5 rounded-full bg-muted px-3 py-1.5 text-[11px] text-foreground ring-1 ring-border">
+                    <GraduationCap className="h-3 w-3 text-luxury" /> {t}
+                  </span>
                 ))}
               </div>
             </div>

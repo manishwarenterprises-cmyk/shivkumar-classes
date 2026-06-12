@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { SITE, NAV, COURSES } from "@/lib/site";
 import { Mail, Phone, MapPin, Instagram, Facebook, Youtube } from "lucide-react";
 import ehLogo from "@/assets/eh-logo.png.asset.json";
-import agencyLogo from "@/assets/manishwarai-logo.jpg.asset.json";
+import agencyLogo from "@/assets/manishwarai-logo-new.png.asset.json";
 
 export function Footer() {
   return (
@@ -84,12 +84,11 @@ export function Footer() {
               </div>
               <div className="text-sm text-luxury font-medium">{SITE.agency}</div>
             </div>
-            <div className="h-10 w-10 grid place-items-center">
+            <div className="h-11 w-11 grid place-items-center rounded-full bg-white/5 ring-1 ring-white/10 overflow-hidden">
               <img
                 src={agencyLogo.url}
                 alt={SITE.agency}
-                className="h-full w-full object-contain"
-                style={{ mixBlendMode: "screen", filter: "invert(1) brightness(1.15) contrast(1.1)" }}
+                className="h-9 w-9 object-contain drop-shadow"
               />
             </div>
           </a>

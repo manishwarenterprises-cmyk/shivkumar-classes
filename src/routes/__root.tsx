@@ -18,6 +18,7 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { BackToTop } from "@/components/BackToTop";
 import { PageTransition } from "@/components/PageTransition";
 import { LiftIntro } from "@/components/LiftIntro";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 function NotFoundComponent() {
   return (
@@ -78,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" },
     ],
     scripts: [
       {
@@ -128,6 +129,7 @@ function RootComponent() {
       <Footer />
       <AIAssistant />
       <BackToTop />
+      <FloatingWhatsApp />
     </QueryClientProvider>
   );
 }
