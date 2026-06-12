@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Star, ArrowRight, MessageCircle, BookOpen, Trophy, Users, Sparkles, GraduationCap, CheckCircle2 } from "lucide-react";
+import { Star, ArrowRight, MessageCircle, BookOpen, Trophy, Users, Sparkles, GraduationCap, CheckCircle2, MapPin, Phone } from "lucide-react";
 import { Section, Reveal, SectionHeader, Eyebrow } from "@/components/primitives";
 import { Counter, FloatingParticles } from "@/components/Counter";
 import { SITE, COURSES, TESTIMONIALS } from "@/lib/site";
 import { ParallaxCard } from "@/components/ParallaxCard";
+import shivSir from "@/assets/shiv-sir.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -78,6 +79,51 @@ function Home() {
           transition={{ duration: 10, repeat: Infinity }}
         />
       </section>
+
+      {/* FOUNDER STRIP */}
+      <Section>
+        <div className="grid lg:grid-cols-5 gap-10 items-center">
+          <Reveal className="lg:col-span-2">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9 }}
+              className="relative"
+            >
+              <div className="absolute -inset-5 rounded-[2.5rem] gradient-lavender opacity-30 blur-2xl" />
+              <div className="relative aspect-[4/5] rounded-[2rem] bg-white ring-1 ring-border shadow-luxe overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-white to-[oklch(0.96_0.03_300)]" />
+                <img src={shivSir.url} alt="Shiv Sir" className="absolute inset-0 h-full w-full object-cover object-top" />
+                <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border px-4 py-3 shadow-soft">
+                  <div className="text-xs uppercase tracking-[0.2em] text-luxury">Founder & Mentor</div>
+                  <div className="font-display text-lg">Shiv Sir</div>
+                </div>
+              </div>
+            </motion.div>
+          </Reveal>
+          <Reveal className="lg:col-span-3" delay={0.1}>
+            <Eyebrow>Meet the founder</Eyebrow>
+            <h2 className="mt-5 font-display text-4xl md:text-5xl">
+              13 years of <span className="gold-text">commerce mastery</span>, taught with calm and care.
+            </h2>
+            <p className="mt-5 text-muted-foreground leading-relaxed">
+              Shiv Sir began this journey in 2012 with one mission — to make commerce education feel meaningful, not mechanical. With an M.Com qualification and over a decade of dedicated classroom teaching, he has personally mentored 850+ students across 11th, 12th, B.Com and BBA.
+            </p>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              His teaching blends rigorous board preparation with real Indian business stories, while his calm, patient approach has earned the trust of parents across Nagpur — reflected in a perfect 5.0 Google rating and 62+ verified reviews.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link to="/about" className="inline-flex items-center gap-2 rounded-2xl gradient-luxe text-white px-5 py-3 text-sm font-medium shadow-luxe">
+                Read full story <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link to="/admission" className="inline-flex items-center gap-2 rounded-2xl bg-white ring-1 ring-border px-5 py-3 text-sm font-medium hover:shadow-soft">
+                Book Free Demo
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
 
       {/* COURSES PREVIEW */}
       <Section>
