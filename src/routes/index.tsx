@@ -93,8 +93,8 @@ function Home() {
             >
               <div className="absolute -inset-5 rounded-[2.5rem] gradient-lavender opacity-30 blur-2xl" />
               <div className="relative aspect-[4/5] rounded-[2rem] bg-white ring-1 ring-border shadow-luxe overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-white to-[oklch(0.96_0.03_300)]" />
-                <img src={shivSir.url} alt="Shiv Sir" className="absolute inset-0 h-full w-full object-cover object-top" />
+                <div className="absolute inset-0 bg-white" />
+                <img src={shivSir.url} alt="Shiv Sir" className="absolute inset-0 h-full w-full object-cover object-top" style={{ mixBlendMode: "multiply" }} />
                 <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border px-4 py-3 shadow-soft">
                   <div className="text-xs uppercase tracking-[0.2em] text-luxury">Founder & Mentor</div>
                   <div className="font-display text-lg">Shiv Sir</div>
