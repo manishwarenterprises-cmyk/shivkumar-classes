@@ -64,21 +64,21 @@ function About() {
                 </div>
                 <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border p-4 shadow-soft">
                   <p className="text-sm text-foreground italic leading-relaxed">"Commerce isn't about memorising — it's about understanding how the world really works."</p>
-                  <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-luxury">— Shiv Sir</div>
+                  <div className="mt-2 text-[11px] uppercase tracking-[0.18em] text-luxury font-bold">— Shiv Kumar Dubey</div>
                 </div>
               </div>
             </motion.div>
           </Reveal>
           <Reveal delay={0.1}>
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white ring-1 ring-border px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-luxury">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white ring-1 ring-border px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-luxury font-bold">
                 <Award className="h-3 w-3" /> 13+ Years of Mentoring
               </div>
-              <h3 className="mt-5 font-display text-4xl md:text-5xl text-foreground">
-                Meet <span className="gold-text">Shiv Sir</span>
+              <h3 className="mt-5 font-display text-4xl md:text-5xl text-foreground font-extrabold uppercase tracking-tight">
+                Meet <span className="gold-text">Shiv Kumar Dubey</span>
               </h3>
               <p className="mt-5 text-muted-foreground leading-relaxed">
-                A commerce educator at heart, Shiv Sir began his journey in 2012 with one simple promise — to teach commerce the way it deserves to be taught: with patience, with depth, and with genuine respect for every student who walks through the door.
+                A commerce educator at heart, <span className="font-bold uppercase text-foreground">Prof. Shiv Kumar Dubey</span> (fondly known as Shiv Sir) began his journey in 2012 with one simple promise — to teach commerce the way it deserves to be taught: with patience, with depth, and with genuine respect for every student who walks through the door.
               </p>
               <p className="mt-4 text-muted-foreground leading-relaxed">
                 With a master's in Commerce and over a decade of classroom mastery, he has personally mentored 850+ students — from nervous 11th standard beginners to graduating B.Com toppers. His approach blends rigorous board-pattern preparation with real Indian business stories, making Accountancy, Economics and Business Studies feel alive instead of abstract.

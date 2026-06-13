@@ -76,21 +76,19 @@ export function Footer() {
           <div>© {new Date().getFullYear()} Shiv Sir's Education Hub. All rights reserved.</div>
           <a
             href="#"
-            className="group flex items-center gap-4 rounded-2xl bg-white/[0.04] ring-1 ring-white/10 px-5 py-3 hover:bg-white/[0.08] hover:ring-luxury/40 transition"
+            className="group flex items-center gap-5 rounded-2xl px-3 py-2 hover:bg-white/[0.04] transition"
           >
             <div className="leading-tight text-right">
-              <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">
+              <div className="text-[10px] uppercase tracking-[0.25em] text-white/50 font-bold">
                 Designed & Developed By
               </div>
-              <div className="text-base text-luxury font-semibold">{SITE.agency}</div>
+              <div className="text-base text-luxury font-extrabold uppercase tracking-wide">{SITE.agency}</div>
             </div>
-            <div className="h-20 w-20 md:h-24 md:w-24 grid place-items-center rounded-2xl bg-white/5 ring-1 ring-luxury/30 overflow-hidden shadow-luxe">
-              <img
-                src={agencyLogo.url}
-                alt={SITE.agency}
-                className="h-full w-full object-contain p-1 drop-shadow-[0_0_12px_rgba(198,169,105,0.4)]"
-              />
-            </div>
+            <img
+              src={agencyLogo.url}
+              alt={SITE.agency}
+              className="h-28 w-28 md:h-36 md:w-36 object-contain drop-shadow-[0_0_18px_rgba(198,169,105,0.55)]"
+            />
           </a>
         </div>
       </div>

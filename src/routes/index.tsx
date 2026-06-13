@@ -105,20 +105,20 @@ function Home() {
               <div className="relative aspect-[4/5] rounded-[2rem] ring-1 ring-border shadow-luxe overflow-hidden">
                 <img src={shivSir.url} alt="Shiv Sir — Founder of Education Hub" className="absolute inset-0 h-full w-full object-cover object-top" />
                 <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border px-4 py-3 shadow-soft">
-                  <div className="text-xs uppercase tracking-[0.2em] text-luxury">Founder & Mentor</div>
-                  <div className="font-display text-lg">Shiv Sir</div>
+                  <div className="text-[10px] uppercase tracking-[0.25em] text-luxury font-bold">Founder & Mentor</div>
+                  <div className="font-display text-xl font-extrabold uppercase tracking-wide">Shiv Kumar Dubey</div>
                 </div>
               </div>
             </motion.div>
           </Reveal>
           <Reveal className="lg:col-span-3" delay={0.1}>
             <Eyebrow>Meet the founder</Eyebrow>
-            <h2 className="mt-5 font-display text-4xl md:text-5xl">
-              13 years of <span className="gold-text">commerce mastery</span>, taught with calm and care.
-            </h2>
-            <p className="mt-5 text-muted-foreground leading-relaxed">
-              Shiv Sir began this journey in 2012 with one mission — to make commerce education feel meaningful, not mechanical. With an M.Com qualification and over a decade of dedicated classroom teaching, he has personally mentored 850+ students across 11th, 12th, B.Com and BBA.
-            </p>
+              <h2 className="mt-5 font-display text-4xl md:text-5xl font-extrabold uppercase tracking-tight">
+                13 Years Of <span className="gold-text">Commerce Mastery</span>, Taught With Calm & Care.
+              </h2>
+              <p className="mt-5 text-muted-foreground leading-relaxed">
+                <span className="font-bold uppercase text-foreground tracking-wide">Prof. Shiv Kumar Dubey</span> began this journey in 2012 with one mission — to make commerce education feel meaningful, not mechanical. With an M.Com qualification and over a decade of dedicated classroom teaching, he has personally mentored 850+ students across 11th, 12th, B.Com and BBA.
+              </p>
             <p className="mt-4 text-muted-foreground leading-relaxed">
               His teaching blends rigorous board preparation with real Indian business stories, while his calm, patient approach has earned the trust of parents across Nagpur — reflected in a perfect 5.0 Google rating and 62+ verified reviews.
             </p>
