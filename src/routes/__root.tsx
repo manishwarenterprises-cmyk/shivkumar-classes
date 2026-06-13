@@ -131,6 +131,7 @@ function RootComponent() {
       <AIAssistant />
       <BackToTop />
       <FloatingWhatsApp />
+      <CursorGlow />
     </QueryClientProvider>
   );
 }
