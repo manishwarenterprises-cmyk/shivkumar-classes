@@ -198,6 +198,12 @@ function Home() {
               </Reveal>
             ))}
           </div>
+
+          {/* Climbing staircase: Learn → Practice → Test → Improve → Succeed */}
+          <Reveal>
+            <div className="mt-16 text-[11px] uppercase tracking-[0.3em] text-luxury">The Five-Step Climb</div>
+            <CommerceStaircase />
+          </Reveal>
         </div>
       </section>
 
