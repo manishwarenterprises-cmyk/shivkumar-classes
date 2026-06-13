@@ -5,7 +5,9 @@ import { Section, Reveal, SectionHeader, Eyebrow } from "@/components/primitives
 import { Counter, FloatingParticles } from "@/components/Counter";
 import { SITE, COURSES, TESTIMONIALS } from "@/lib/site";
 import { ParallaxCard } from "@/components/ParallaxCard";
-import shivSir from "@/assets/shiv-sir.png.asset.json";
+import { Magnetic } from "@/components/MagneticButton";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
+import shivSir from "@/assets/shiv-sir-new.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,30 +27,38 @@ function Home() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden gradient-hero -mt-24 pt-32 pb-24 md:pt-44 md:pb-32">
+        <HeroBackdrop />
         <FloatingParticles />
         <div className="relative mx-auto max-w-7xl px-6">
           <Reveal>
             <Eyebrow>Est. 2012 · Nagpur, Maharashtra</Eyebrow>
           </Reveal>
-          <Reveal delay={0.08}>
-            <h1 className="mt-6 font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] text-balance max-w-5xl">
-              Building <span className="gold-text">Future Commerce</span> Leaders Since 2012
-            </h1>
-          </Reveal>
-          <Reveal delay={0.16}>
+          <motion.h1
+            initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] text-balance max-w-5xl"
+          >
+            Building <span className="gold-text">Future Commerce</span> Leaders Since 2012
+          </motion.h1>
+          <Reveal delay={0.4}>
             <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl text-pretty leading-relaxed">
               Trusted commerce coaching for 11th, 12th, B.Com and BBA students in Nagpur — taught with the calm, depth and rigour your future deserves.
             </p>
           </Reveal>
-          <Reveal delay={0.24}>
+          <Reveal delay={0.55}>
             <div className="mt-9 flex flex-wrap gap-3">
-              <Link to="/admission" className="group inline-flex items-center gap-2 rounded-2xl gradient-luxe text-white px-6 py-3.5 text-sm font-medium shadow-luxe hover:scale-[1.02] transition">
-                Book Free Demo
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition" />
-              </Link>
-              <a href={`https://wa.me/${SITE.whatsapp}`} className="inline-flex items-center gap-2 rounded-2xl bg-white ring-1 ring-border px-6 py-3.5 text-sm font-medium hover:shadow-soft transition">
-                <MessageCircle className="h-4 w-4" /> WhatsApp Us
-              </a>
+              <Magnetic>
+                <Link to="/admission" className="group inline-flex items-center gap-2 rounded-2xl gradient-luxe text-white px-6 py-3.5 text-sm font-medium shadow-luxe hover:scale-[1.02] transition neon-gold">
+                  Book Free Demo
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition" />
+                </Link>
+              </Magnetic>
+              <Magnetic>
+                <a href={`https://wa.me/${SITE.whatsapp}`} className="inline-flex items-center gap-2 rounded-2xl bg-white ring-1 ring-border px-6 py-3.5 text-sm font-medium hover:shadow-soft transition">
+                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                </a>
+              </Magnetic>
             </div>
           </Reveal>
 
@@ -92,9 +102,8 @@ function Home() {
               className="relative"
             >
               <div className="absolute -inset-5 rounded-[2.5rem] gradient-lavender opacity-30 blur-2xl" />
-              <div className="relative aspect-[4/5] rounded-[2rem] bg-white ring-1 ring-border shadow-luxe overflow-hidden">
-                <div className="absolute inset-0 bg-white" />
-                <img src={shivSir.url} alt="Shiv Sir" className="absolute inset-0 h-full w-full object-cover object-top" style={{ mixBlendMode: "multiply" }} />
+              <div className="relative aspect-[4/5] rounded-[2rem] ring-1 ring-border shadow-luxe overflow-hidden">
+                <img src={shivSir.url} alt="Shiv Sir — Founder of Education Hub" className="absolute inset-0 h-full w-full object-cover object-top" />
                 <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border px-4 py-3 shadow-soft">
                   <div className="text-xs uppercase tracking-[0.2em] text-luxury">Founder & Mentor</div>
                   <div className="font-display text-lg">Shiv Sir</div>

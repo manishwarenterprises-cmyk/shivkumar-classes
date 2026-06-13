@@ -3,7 +3,7 @@ import { Section, SectionHeader, Reveal } from "@/components/primitives";
 import { Counter } from "@/components/Counter";
 import { motion } from "framer-motion";
 import { Heart, Target, Eye, BookOpen, Award, GraduationCap, Sparkles } from "lucide-react";
-import shivSir from "@/assets/shiv-sir.png.asset.json";
+import shivSir from "@/assets/shiv-sir-new.png.asset.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -49,17 +49,15 @@ function About() {
               className="relative"
             >
               <div className="absolute -inset-6 rounded-[2.5rem] gradient-lavender opacity-30 blur-2xl" />
-              <div className="relative aspect-[4/5] rounded-[2rem] bg-white ring-1 ring-border shadow-luxe overflow-hidden">
-                <div className="absolute inset-0 bg-white" />
+              <div className="relative aspect-[4/5] rounded-[2rem] ring-1 ring-border shadow-luxe overflow-hidden">
                 <motion.img
                   src={shivSir.url}
                   alt="Shiv Sir — Founder & Mentor"
                   className="absolute inset-0 h-full w-full object-cover object-top"
-                  style={{ mixBlendMode: "multiply" }}
-                  initial={{ scale: 1.05 }}
+                  initial={{ scale: 1.08 }}
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 1.4, ease: "easeOut" }}
+                  transition={{ duration: 1.6, ease: "easeOut" }}
                 />
                 <div className="absolute top-5 left-5 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur ring-1 ring-luxury/30 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-foreground shadow-soft">
                   <Sparkles className="h-3 w-3 text-luxury" /> Founder & Mentor

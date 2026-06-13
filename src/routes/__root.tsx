@@ -19,6 +19,7 @@ import { BackToTop } from "@/components/BackToTop";
 import { PageTransition } from "@/components/PageTransition";
 import { LiftIntro } from "@/components/LiftIntro";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { CursorGlow } from "@/components/CursorGlow";
 
 function NotFoundComponent() {
   return (
@@ -130,6 +131,7 @@ function RootComponent() {
       <AIAssistant />
       <BackToTop />
       <FloatingWhatsApp />
+      <CursorGlow />
     </QueryClientProvider>
   );
 }
