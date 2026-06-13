@@ -105,8 +105,8 @@ function Home() {
               <div className="relative aspect-[4/5] rounded-[2rem] ring-1 ring-border shadow-luxe overflow-hidden">
                 <img src={shivSir.url} alt="Shiv Sir — Founder of Education Hub" className="absolute inset-0 h-full w-full object-cover object-top" />
                 <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border px-4 py-3 shadow-soft">
-                  <div className="text-xs uppercase tracking-[0.2em] text-luxury">Founder & Mentor</div>
-                  <div className="font-display text-lg">Shiv Sir</div>
+                  <div className="text-[10px] uppercase tracking-[0.25em] text-luxury font-bold">Founder & Mentor</div>
+                  <div className="font-display text-xl font-extrabold uppercase tracking-wide">Shiv Kumar Dubey</div>
                 </div>
               </div>
             </motion.div>
