@@ -223,26 +223,27 @@ function Home() {
           eyebrow="Trusted by Parents & Students"
           title={<>Real reviews from real <span className="gold-text">Google</span> students</>}
         />
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 perspective-1000">
           {TESTIMONIALS.slice(0, 3).map((t, i) => (
             <Reveal key={t.name} delay={i * 0.08}>
-              <div className="h-full rounded-3xl bg-white ring-1 ring-border p-7 shadow-soft">
-                <div className="flex gap-0.5">
+              <CertificateCard>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-luxury font-bold">Certificate of Trust</div>
+                <div className="mt-1 flex gap-0.5">
                   {Array.from({ length: 5 }).map((_, k) => (
                     <Star key={k} className="h-4 w-4 fill-luxury text-luxury" />
                   ))}
                 </div>
-                <p className="mt-5 text-sm text-foreground leading-relaxed text-pretty">"{t.content}"</p>
-                <div className="mt-6 flex items-center gap-3 pt-5 border-t border-border">
+                <p className="mt-5 text-sm text-foreground leading-relaxed text-pretty italic">"{t.content}"</p>
+                <div className="mt-6 flex items-center gap-3 pt-5 border-t border-luxury/20">
                   <div className="h-9 w-9 rounded-full gradient-luxe grid place-items-center text-white text-xs font-medium">
                     {t.name.split(" ").map((n) => n[0]).join("")}
                   </div>
                   <div>
-                    <div className="text-sm font-medium">{t.name}</div>
-                    <div className="text-[11px] text-muted-foreground">Google Review</div>
+                    <div className="text-sm font-bold uppercase tracking-wide">{t.name}</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-luxury">Verified Review</div>
                   </div>
                 </div>
-              </div>
+              </CertificateCard>
             </Reveal>
           ))}
         </div>
