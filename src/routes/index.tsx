@@ -7,6 +7,9 @@ import { SITE, COURSES, TESTIMONIALS } from "@/lib/site";
 import { ParallaxCard } from "@/components/ParallaxCard";
 import { Magnetic } from "@/components/MagneticButton";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { CommerceStaircase } from "@/components/CommerceStaircase";
+import { RocketLaunch } from "@/components/RocketLaunch";
+import { CertificateCard } from "@/components/CertificateCard";
 import shivSir from "@/assets/shiv-sir-new.png.asset.json";
 
 export const Route = createFileRoute("/")({
