@@ -17,7 +17,7 @@ import { AIAssistant } from "@/components/AIAssistant";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { BackToTop } from "@/components/BackToTop";
 import { PageTransition } from "@/components/PageTransition";
-import { LiftIntro } from "@/components/LiftIntro";
+import { LedgerIntro } from "@/components/LedgerIntro";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { CursorGlow } from "@/components/CursorGlow";
 
