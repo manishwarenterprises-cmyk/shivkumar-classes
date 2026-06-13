@@ -207,26 +207,14 @@ function Home() {
         </div>
       </section>
 
-      {/* RESULTS PREVIEW */}
+      {/* RESULTS — Rocket Launch */}
       <Section>
-        <SectionHeader eyebrow="Student Success" title={<>Numbers that tell a quiet story</>} />
-        <div className="mt-14 grid gap-6 md:grid-cols-4">
-          {[
-            { v: 850, s: "+", l: "Students Taught" },
-            { v: 94, s: "%", l: "Avg Board Score" },
-            { v: 120, s: "+", l: "90%+ Scorers" },
-            { v: 5.0, s: "", l: "Google Rating", d: 1 },
-          ].map((s) => (
-            <Reveal key={s.l}>
-              <div className="rounded-3xl bg-white ring-1 ring-border p-7 shadow-soft text-center">
-                <div className="font-display text-4xl md:text-5xl gold-text">
-                  <Counter to={s.v} suffix={s.s} decimals={s.d ?? 0} />
-                </div>
-                <div className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">{s.l}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <SectionHeader
+          eyebrow="Student Success"
+          title={<>The <span className="gold-text">launch sequence</span> of every commerce career</>}
+          subtitle="Scroll — and watch the rocket of growth take off."
+        />
+        <RocketLaunch />
       </Section>
 
       {/* TESTIMONIAL PREVIEW */}
