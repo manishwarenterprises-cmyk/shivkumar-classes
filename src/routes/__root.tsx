@@ -119,7 +119,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <LiftIntro />
+      <LedgerIntro />
       <ScrollProgress />
       <Header />
       <main className="pt-24">
