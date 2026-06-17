@@ -43,9 +43,9 @@ function CourseDetail() {
           </Link>
         </Reveal>
         <Reveal delay={0.05}>
-          <div className="mt-6 flex items-center gap-3">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-luxury">{course.tag}</span>
-            <span className="text-xs text-muted-foreground">· {course.duration}</span>
+          <div className="mt-6 flex items-center gap-3 flex-wrap">
+            <span className="text-base md:text-lg font-bold uppercase tracking-[0.22em] gold-text">{course.tag}</span>
+            <span className="text-sm text-muted-foreground">· {course.duration}</span>
           </div>
         </Reveal>
         <Reveal delay={0.1}>
