@@ -1,61 +1,52 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, X, Send, Sparkles } from "lucide-react";
-import { FAQS, SITE, COURSES } from "@/lib/site";
+import { MessageCircle, X, Send, Sparkles, Loader2 } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { askAssistant } from "@/lib/chat.functions";
 
-type Msg = { role: "bot" | "user"; text: string };
+type Msg = { role: "assistant" | "user"; content: string };
 
 const SUGGESTIONS = [
-  "What are the fees?",
   "What courses do you offer?",
+  "Explain Journal Entry with example",
   "Admission process?",
-  "Class timings?",
-  "Where are you located?",
+  "Difference between B.Com and BBA?",
+  "Class timings & location?",
 ];
-
-function answer(q: string): string {
-  const s = q.toLowerCase();
-  if (/(fee|cost|price|charge)/.test(s))
-    return "Our fees vary by course and are kept transparent and competitive. Please book a free demo or message us on WhatsApp at " + SITE.phone + " for a personalised quote.";
-  if (/(course|class|subject|stream)/.test(s))
-    return "We offer specialised commerce coaching for: " + COURSES.map((c) => c.title).join(", ") + ". Each course is taught personally by Shiv Sir.";
-  if (/(admission|enroll|join|register)/.test(s))
-    return "Admission is simple — 1) Book a free demo class, 2) Meet Shiv Sir for orientation, 3) Complete registration. It takes just one visit.";
-  if (/(career|future|scope|job)/.test(s))
-    return "Commerce opens doors to CA, CS, CMA, B.Com, BBA, MBA, Data Analytics, Banking, Finance and Entrepreneurship. Visit our Blog for detailed career guides.";
-  if (/(location|where|address|map|reach)/.test(s))
-    return "We are centrally located in " + SITE.city + ", easily reachable from all major commerce schools. See our Contact page for directions.";
-  if (/(timing|schedule|hour|when)/.test(s))
-    return "Morning, afternoon and evening batches are available. The evening batch (5:00 PM – 8:00 PM) is most popular with school students.";
-  if (/(demo|trial|free)/.test(s))
-    return "Yes! We offer a free demo class so you can experience the teaching style before enrolling. Book it from the Admission page.";
-  const faq = FAQS.find((f) => s.split(" ").some((w) => w.length > 3 && f.q.toLowerCase().includes(w)));
-  if (faq) return faq.a;
-  return "Great question. I'd love to help — please WhatsApp us at " + SITE.phone + " or visit our Contact page and the team will respond personally within minutes.";
-}
 
 export function AIAssistant() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([
     {
-      role: "bot",
-      text: "Hi! I'm the Commerce Assistant for Shiv Sir's Education Hub. Ask me about courses, fees, admissions, timings or career paths.",
+      role: "assistant",
+      content:
+        "Namaste! 🙏 I'm the AI assistant for Shiv Sir's Education Hub. Ask me anything — about courses, fees, admissions, or even commerce concepts like journal entries, GST or supply & demand. How can I help?",
     },
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const ask = useServerFn(askAssistant);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 9999, behavior: "smooth" });
-  }, [msgs, open]);
+  }, [msgs, open, busy]);
 
-  const send = (text: string) => {
-    if (!text.trim()) return;
-    setMsgs((m) => [...m, { role: "user", text }]);
+  const send = async (text: string) => {
+    if (!text.trim() || busy) return;
+    const next: Msg[] = [...msgs, { role: "user", content: text }];
+    setMsgs(next);
     setInput("");
-    setTimeout(() => {
-      setMsgs((m) => [...m, { role: "bot", text: answer(text) }]);
-    }, 450);
+    setBusy(true);
+    try {
+      const { reply } = await ask({ data: { messages: next } });
+      setMsgs((m) => [...m, { role: "assistant", content: reply }]);
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : "Connection issue. Please try again.";
+      setMsgs((m) => [...m, { role: "assistant", content: `⚠️ ${msg}` }]);
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
@@ -66,7 +57,7 @@ export function AIAssistant() {
         transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
         onClick={() => setOpen((v) => !v)}
         className="fixed bottom-6 right-6 z-50 h-14 w-14 grid place-items-center rounded-full gradient-luxe text-white shadow-luxe hover:scale-105 transition"
-        aria-label="Open assistant"
+        aria-label="Open AI assistant"
       >
         <AnimatePresence mode="wait">
           {open ? (
@@ -79,7 +70,7 @@ export function AIAssistant() {
             </motion.div>
           )}
         </AnimatePresence>
-        <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full gradient-gold ring-2 ring-white" />
+        <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full gradient-gold ring-2 ring-white animate-pulse" />
       </motion.button>
 
       <AnimatePresence>
@@ -89,7 +80,7 @@ export function AIAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
             transition={{ duration: 0.25 }}
-            className="fixed bottom-24 right-6 z-50 w-[min(380px,calc(100vw-3rem))] glass shadow-luxe rounded-3xl overflow-hidden"
+            className="fixed bottom-24 right-6 z-50 w-[min(400px,calc(100vw-2rem))] glass shadow-luxe rounded-3xl overflow-hidden"
           >
             <div className="gradient-luxe text-white p-5">
               <div className="flex items-center gap-3">
@@ -97,32 +88,41 @@ export function AIAssistant() {
                   <Sparkles className="h-4 w-4 text-luxury" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium">Commerce Assistant</div>
-                  <div className="text-[11px] text-white/60">Usually replies instantly</div>
+                  <div className="text-sm font-semibold tracking-wide">Commerce AI Assistant</div>
+                  <div className="text-[11px] text-white/70">Powered by Lovable AI · Trained on Education Hub</div>
                 </div>
               </div>
             </div>
-            <div ref={scrollRef} className="max-h-[340px] overflow-y-auto p-4 space-y-3 bg-background/50">
+            <div ref={scrollRef} className="max-h-[380px] overflow-y-auto p-4 space-y-3 bg-background/50">
               {msgs.map((m, i) => (
                 <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
-                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
                       m.role === "user"
                         ? "bg-foreground text-background"
                         : "bg-white shadow-soft text-foreground"
                     }`}
                   >
-                    {m.text}
+                    {m.content}
                   </div>
                 </div>
               ))}
+              {busy && (
+                <div className="flex justify-start">
+                  <div className="bg-white shadow-soft rounded-2xl px-3.5 py-2.5 text-sm text-muted-foreground inline-flex items-center gap-2">
+                    <Loader2 className="h-3.5 w-3.5 animate-spin text-luxury" />
+                    Thinking…
+                  </div>
+                </div>
+              )}
             </div>
             <div className="px-4 pb-2 flex flex-wrap gap-1.5">
               {SUGGESTIONS.map((s) => (
                 <button
                   key={s}
                   onClick={() => send(s)}
-                  className="text-[11px] rounded-full bg-white ring-1 ring-border px-2.5 py-1 hover:bg-muted transition"
+                  disabled={busy}
+                  className="text-[11px] rounded-full bg-white ring-1 ring-border px-2.5 py-1 hover:bg-muted transition disabled:opacity-50"
                 >
                   {s}
                 </button>
@@ -135,11 +135,17 @@ export function AIAssistant() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask anything…"
-                className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                placeholder="Ask about courses, admission or commerce…"
+                disabled={busy}
+                className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground disabled:opacity-50"
               />
-              <button type="submit" className="h-8 w-8 grid place-items-center rounded-full gradient-luxe text-white">
-                <Send className="h-3.5 w-3.5" />
+              <button
+                type="submit"
+                disabled={busy || !input.trim()}
+                className="h-8 w-8 grid place-items-center rounded-full gradient-luxe text-white disabled:opacity-50"
+                aria-label="Send"
+              >
+                {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
               </button>
             </form>
           </motion.div>

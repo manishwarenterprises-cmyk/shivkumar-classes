@@ -33,7 +33,7 @@ function CoursesLayout() {
               <Link to="/courses/$slug" params={{ slug: c.slug }} className="group block h-full">
                 <div className="h-full rounded-3xl bg-white ring-1 ring-border p-7 hover:shadow-luxe transition-all hover:-translate-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] uppercase tracking-[0.18em] text-luxury">{c.tag}</span>
+                    <span className="text-sm md:text-base font-bold uppercase tracking-[0.2em] gold-text">{c.tag}</span>
                     <span className="inline-flex items-center gap-1 text-xs text-muted-foreground"><Clock className="h-3 w-3" />{c.duration}</span>
                   </div>
                   <div className="mt-5 flex items-center gap-3">
