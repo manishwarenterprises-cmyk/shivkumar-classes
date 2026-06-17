@@ -1,13 +1,23 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, LayoutDashboard, LogIn } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
+import { supabase } from "@/integrations/supabase/client";
 import ehLogo from "@/assets/eh-logo.png.asset.json";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setSignedIn(!!session);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   return (
     <motion.header
@@ -57,6 +67,23 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
+            {signedIn ? (
+              <Link
+                to="/dashboard"
+                className="hidden md:inline-flex items-center gap-2 rounded-xl gradient-luxe text-white px-4 py-2 text-sm font-medium shadow-soft hover:opacity-95 transition"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                to="/auth"
+                className="hidden md:inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-border px-4 py-2 text-sm font-medium hover:bg-muted/50 transition"
+              >
+                <LogIn className="h-4 w-4" />
+                Sign In
+              </Link>
+            )}
             <a
               href={`https://wa.me/${SITE.whatsapp}`}
               target="_blank"
