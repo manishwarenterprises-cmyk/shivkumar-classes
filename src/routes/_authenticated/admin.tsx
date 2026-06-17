@@ -1,4 +1,5 @@
-import { createFileRoute, redirect, Link, useServerFn } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Users, BookOpen, Video, MessageSquare, BarChart3, Bell, Settings, Loader2, ShieldAlert } from "lucide-react";
