@@ -2,10 +2,10 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { BookOpen, Video, GraduationCap, Award, FileText, Calendar, LogOut, Shield, Loader2 } from "lucide-react";
+import { BookOpen, Video, GraduationCap, Award, FileText, Calendar, LogOut, Shield, Loader2, PlayCircle } from "lucide-react";
 import { Section } from "@/components/primitives";
-import { COURSES } from "@/lib/site";
 import { getAccountSummary } from "@/lib/account.functions";
+import { listMyEnrollments } from "@/lib/courses.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
@@ -17,10 +17,15 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 
 function Dashboard() {
   const fetchSummary = useServerFn(getAccountSummary);
+  const fetchEnrollments = useServerFn(listMyEnrollments);
   const navigate = useNavigate();
   const { data, isLoading } = useQuery({
     queryKey: ["account-summary"],
     queryFn: () => fetchSummary({}),
+  });
+  const enrollments = useQuery({
+    queryKey: ["my-enrollments"],
+    queryFn: () => fetchEnrollments({}),
   });
 
   const signOut = async () => {
@@ -89,36 +94,40 @@ function Dashboard() {
       </Section>
 
       <Section>
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex items-end justify-between mb-8 flex-wrap gap-3">
           <div>
-            <div className="text-xs uppercase tracking-[0.3em] gold-text font-bold">Explore</div>
-            <h2 className="mt-2 font-display text-3xl md:text-4xl">Available courses</h2>
+            <div className="text-xs uppercase tracking-[0.3em] gold-text font-bold">My Learning</div>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl">Enrolled courses</h2>
           </div>
-          <Link to="/courses" className="text-sm font-medium hover:gold-text transition">View all →</Link>
+          <Link to="/learn" className="text-sm font-medium hover:gold-text transition">All courses →</Link>
         </div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {COURSES.slice(0, 6).map((c, i) => (
-            <motion.div
-              key={c.slug}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-            >
-              <Link
-                to="/courses/$slug"
-                params={{ slug: c.slug }}
-                className="block h-full rounded-3xl bg-white ring-1 ring-border p-6 hover:shadow-luxe transition hover:-translate-y-1"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-bold uppercase tracking-[0.2em] gold-text">{c.tag}</span>
-                  <GraduationCap className="h-5 w-5 text-luxury" />
-                </div>
-                <h3 className="mt-4 font-display text-xl">{c.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{c.summary}</p>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+        {enrollments.isLoading ? (
+          <Loader2 className="h-6 w-6 animate-spin text-luxury" />
+        ) : (enrollments.data ?? []).length === 0 ? (
+          <div className="rounded-3xl bg-white ring-1 ring-border p-8 text-center">
+            <BookOpen className="h-10 w-10 text-luxury mx-auto" />
+            <p className="mt-3 text-muted-foreground">You haven't enrolled in any LMS courses yet.</p>
+            <Link to="/learn" className="mt-4 inline-flex rounded-xl gradient-luxe text-white px-5 py-2.5 text-sm font-medium">Browse courses</Link>
+          </div>
+        ) : (
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {enrollments.data!.map((e, i) => (
+              <motion.div key={e.course.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
+                <Link to="/learn/$slug" params={{ slug: e.course.slug }} className="block h-full rounded-3xl bg-white ring-1 ring-border p-6 hover:shadow-luxe transition hover:-translate-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-bold uppercase tracking-[0.2em] gold-text">{e.course.tag}</span>
+                    <GraduationCap className="h-5 w-5 text-luxury" />
+                  </div>
+                  <h3 className="mt-4 font-display text-xl">{e.course.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{e.course.summary}</p>
+                  <div className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-luxury">
+                    <PlayCircle className="h-4 w-4" /> Continue
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </Section>
 
       <Section>
@@ -126,7 +135,7 @@ function Dashboard() {
           <FileText className="h-8 w-8 text-luxury" />
           <h3 className="mt-4 font-display text-2xl md:text-3xl">More features rolling out soon</h3>
           <p className="mt-3 text-white/80 max-w-xl text-sm leading-relaxed">
-            Recorded lectures, live class scheduling, MCQ tests, PDF notes and certificates will be available in the next phases. Your account is already set up — you'll see new tools appear here as we ship them.
+            Live class scheduling, MCQ tests, PDF notes and certificates will be available in Phase 4. Your account is already set up.
           </p>
         </div>
       </Section>
