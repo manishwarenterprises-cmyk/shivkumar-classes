@@ -44,12 +44,12 @@ function AdminPage() {
   }
 
   const tiles = [
-    { icon: Users, label: "Students", value: "—", note: "Manage enrollments" },
-    { icon: BookOpen, label: "Courses", value: "—", note: "Create & edit courses" },
-    { icon: Video, label: "Lectures", value: "—", note: "Upload recordings" },
-    { icon: MessageSquare, label: "Live Classes", value: "—", note: "Schedule Zoom/Meet" },
-    { icon: BarChart3, label: "Revenue", value: "—", note: "Analytics & reports" },
-    { icon: Bell, label: "Announcements", value: "—", note: "Push notifications" },
+    { icon: BookOpen, label: "Courses & Lectures", value: "Manage", note: "Create courses, upload videos", to: "/admin/courses" as const },
+    { icon: Users, label: "Students", value: "—", note: "Coming Phase 4" },
+    { icon: Video, label: "Live Classes", value: "—", note: "Coming Phase 4" },
+    { icon: MessageSquare, label: "Tests & Quizzes", value: "—", note: "Coming Phase 4" },
+    { icon: BarChart3, label: "Revenue", value: "—", note: "Coming Phase 5" },
+    { icon: Bell, label: "Announcements", value: "—", note: "Coming Phase 5" },
     { icon: Settings, label: "Settings", value: "—", note: "Institute settings" },
   ];
 
@@ -67,25 +67,27 @@ function AdminPage() {
 
       <Section className="!pt-0">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {tiles.map((t, i) => (
-            <motion.div
-              key={t.label}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className="rounded-3xl bg-white ring-1 ring-border p-6 shadow-soft hover:shadow-luxe transition hover:-translate-y-1 cursor-pointer"
-            >
-              <div className="flex items-start justify-between">
-                <div className="h-10 w-10 rounded-2xl gradient-luxe grid place-items-center text-white">
-                  <t.icon className="h-5 w-5" />
+          {tiles.map((t, i) => {
+            const inner = (
+              <>
+                <div className="flex items-start justify-between">
+                  <div className="h-10 w-10 rounded-2xl gradient-luxe grid place-items-center text-white">
+                    <t.icon className="h-5 w-5" />
+                  </div>
+                  {(t as any).to && <span className="text-[10px] uppercase tracking-wider text-luxury/80">Live</span>}
                 </div>
-                <span className="text-[10px] uppercase tracking-wider text-luxury/80">Phase 3+</span>
-              </div>
-              <div className="mt-5 font-display text-3xl font-bold">{t.value}</div>
-              <div className="mt-1 text-sm font-medium">{t.label}</div>
-              <div className="mt-1 text-xs text-muted-foreground">{t.note}</div>
-            </motion.div>
-          ))}
+                <div className="mt-5 font-display text-2xl font-bold">{t.value}</div>
+                <div className="mt-1 text-sm font-medium">{t.label}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{t.note}</div>
+              </>
+            );
+            const cls = "block rounded-3xl bg-white ring-1 ring-border p-6 shadow-soft hover:shadow-luxe transition hover:-translate-y-1";
+            return (
+              <motion.div key={t.label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
+                {(t as any).to ? <Link to={(t as any).to} className={cls}>{inner}</Link> : <div className={cls + " opacity-70"}>{inner}</div>}
+              </motion.div>
+            );
+          })}
         </div>
       </Section>
     </>
