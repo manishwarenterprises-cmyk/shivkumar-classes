@@ -200,7 +200,24 @@ function AuthPage() {
                 {busy && <Loader2 className="h-4 w-4 animate-spin" />}
                 {mode === "signin" ? "Sign In" : "Create Account"}
               </button>
+              {mode === "signin" && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    try { emailSchema.parse(email); } catch { return toast.error("Enter your email above first"); }
+                    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                      redirectTo: `${window.location.origin}/profile`,
+                    });
+                    if (error) toast.error(error.message);
+                    else toast.success("Password reset link sent to your email");
+                  }}
+                  className="w-full text-center text-xs text-muted-foreground hover:text-luxury transition"
+                >
+                  Forgot password?
+                </button>
+              )}
             </form>
+
 
             <div className="mt-6 text-center text-sm text-muted-foreground">
               {mode === "signin" ? "New student?" : "Already have an account?"}{" "}
