@@ -10,7 +10,9 @@ import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { CommerceStaircase } from "@/components/CommerceStaircase";
 import { RocketLaunch } from "@/components/RocketLaunch";
 import { CertificateCard } from "@/components/CertificateCard";
+import { AnnouncementsStrip } from "@/components/AnnouncementsStrip";
 import shivSir from "@/assets/shiv-sir-new.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,8 +30,10 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <>
+      <AnnouncementsStrip audience="home" />
       {/* HERO */}
       <section className="relative overflow-hidden gradient-hero -mt-24 pt-32 pb-24 md:pt-44 md:pb-32">
+
         <HeroBackdrop />
         <FloatingParticles />
         <div className="relative mx-auto max-w-7xl px-6">
