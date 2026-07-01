@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          audience: string
+          body: string
+          created_at: string
+          id: string
+          is_published: boolean
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audience?: string
+          body: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audience?: string
+          body?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       chapters: {
         Row: {
           created_at: string
@@ -436,6 +466,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_store_item_content: {
+        Args: { _item_id: string }
+        Returns: {
+          content_url: string
+          file_url: string
+          kind: Database["public"]["Enums"]["store_item_kind"]
+          preview_url: string
+          title: string
+        }[]
+      }
       has_item_access: {
         Args: { _item_id: string; _user_id: string }
         Returns: boolean
