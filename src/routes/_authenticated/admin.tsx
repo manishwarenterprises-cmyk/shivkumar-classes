@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { Users, BookOpen, Video, MessageSquare, BarChart3, Bell, Settings, Loader2, ShieldAlert } from "lucide-react";
+import { Users, BookOpen, Video, MessageSquare, BarChart3, Bell, Settings, Loader2, ShieldAlert, Store as StoreIcon } from "lucide-react";
+
 import { Section } from "@/components/primitives";
 import { getAccountSummary } from "@/lib/account.functions";
 
@@ -44,14 +45,16 @@ function AdminPage() {
   }
 
   const tiles = [
-    { icon: BookOpen, label: "Courses & Lectures", value: "Manage", note: "Create courses, upload videos", to: "/admin/courses" as const },
-    { icon: Users, label: "Students", value: "—", note: "Coming Phase 4" },
-    { icon: Video, label: "Live Classes", value: "—", note: "Coming Phase 4" },
-    { icon: MessageSquare, label: "Tests & Quizzes", value: "—", note: "Coming Phase 4" },
-    { icon: BarChart3, label: "Revenue", value: "—", note: "Coming Phase 5" },
-    { icon: Bell, label: "Announcements", value: "—", note: "Coming Phase 5" },
+    { icon: StoreIcon, label: "Store · Content", value: "Manage", note: "Subjects, chapters, lectures, notes, tests, prices", to: "/admin/store" as const },
+    { icon: BookOpen, label: "Courses (LMS)", value: "Manage", note: "Course catalog + video lectures", to: "/admin/courses" as const },
+    { icon: Bell, label: "Announcements", value: "Manage", note: "Publish news to home + dashboard", to: "/admin/announcements" as const },
+    { icon: Users, label: "Students", value: "—", note: "Coming next" },
+    { icon: BarChart3, label: "Revenue & Purchases", value: "—", note: "Coming next" },
+    { icon: MessageSquare, label: "Reviews", value: "—", note: "Approve & feature" },
+    { icon: Video, label: "Live Classes", value: "—", note: "Coming next" },
     { icon: Settings, label: "Settings", value: "—", note: "Institute settings" },
   ];
+
 
   return (
     <>
