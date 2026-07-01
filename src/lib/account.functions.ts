@@ -74,8 +74,19 @@ export const updateMyProfile = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => profileInput.parse(d))
   .handler(async ({ context, data }) => {
-    const payload: Record<string, unknown> = { id: context.userId };
-    Object.entries(data).forEach(([k, v]) => { payload[k] = v || null; });
+    const payload = {
+      id: context.userId,
+      full_name: data.full_name || null,
+      phone: data.phone || null,
+      avatar_url: data.avatar_url || null,
+      date_of_birth: data.date_of_birth || null,
+      parent_name: data.parent_name || null,
+      parent_phone: data.parent_phone || null,
+      address: data.address || null,
+      school_college: data.school_college || null,
+      class_level: data.class_level || null,
+      board: data.board || null,
+    };
     const { error } = await context.supabase
       .from("profiles").upsert(payload, { onConflict: "id" });
     if (error) throw new Error(error.message);
