@@ -61,17 +61,36 @@ export const listMyEnrollments = createServerFn({ method: "GET" })
     }));
   });
 
-// === Enroll ===
+// === Enroll — free courses only; paid courses require a verified purchase ===
 export const enrollInCourse = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ courseId: z.string().uuid() }).parse(d))
   .handler(async ({ context, data }) => {
+    // Server-side price check — never trust the client
+    const { data: course, error: courseErr } = await context.supabase
+      .from("courses")
+      .select("id, price_inr, is_published")
+      .eq("id", data.courseId)
+      .maybeSingle();
+    if (courseErr) throw new Error(courseErr.message);
+    if (!course || !course.is_published) throw new Error("Course not available");
+
+    if ((course.price_inr ?? 0) > 0) {
+      // Paid course: require a completed purchase via the store/Razorpay flow.
+      // Direct enrollment is blocked; enrollment is granted by the payment
+      // verification handler after a successful gateway callback.
+      throw new Error(
+        "This is a paid course. Please complete payment from the Store to enroll."
+      );
+    }
+
     const { error } = await context.supabase
       .from("enrollments")
       .insert({ user_id: context.userId, course_id: data.courseId });
     if (error && !error.message.includes("duplicate")) throw new Error(error.message);
     return { ok: true };
   });
+
 
 // === Course + lectures + progress (auth) ===
 export const getCourseDetail = createServerFn({ method: "GET" })
