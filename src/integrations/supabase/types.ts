@@ -466,6 +466,31 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_list_store_items: {
+        Args: { _chapter_id: string }
+        Returns: {
+          bundle_item_ids: string[]
+          chapter_id: string
+          content_url: string | null
+          created_at: string
+          description: string | null
+          file_url: string | null
+          id: string
+          is_published: boolean
+          kind: Database["public"]["Enums"]["store_item_kind"]
+          order_index: number
+          preview_url: string | null
+          price_paise: number
+          title: string
+          updated_at: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "store_items"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       get_store_item_content: {
         Args: { _item_id: string }
         Returns: {
