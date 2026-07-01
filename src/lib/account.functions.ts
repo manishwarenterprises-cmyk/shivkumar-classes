@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { z } from "zod";
 
 export type AccountSummary = {
   userId: string;
@@ -24,6 +25,59 @@ export const getAccountSummary = createServerFn({ method: "GET" })
       fullName: profile?.full_name ?? null,
       phone: profile?.phone ?? null,
       avatarUrl: profile?.avatar_url ?? null,
-      roles: (roles ?? []).map((r) => r.role) as AccountSummary["roles"],
+      roles: (roles ?? []).map((r: any) => r.role) as AccountSummary["roles"],
     };
+  });
+
+export type FullProfile = {
+  id: string;
+  full_name: string | null;
+  phone: string | null;
+  avatar_url: string | null;
+  date_of_birth: string | null;
+  parent_name: string | null;
+  parent_phone: string | null;
+  address: string | null;
+  school_college: string | null;
+  class_level: string | null;
+  board: string | null;
+};
+
+export const getMyProfile = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }): Promise<FullProfile> => {
+    const { data } = await context.supabase
+      .from("profiles")
+      .select("id, full_name, phone, avatar_url, date_of_birth, parent_name, parent_phone, address, school_college, class_level, board")
+      .eq("id", context.userId).maybeSingle();
+    return (data as FullProfile) ?? {
+      id: context.userId, full_name: null, phone: null, avatar_url: null,
+      date_of_birth: null, parent_name: null, parent_phone: null,
+      address: null, school_college: null, class_level: null, board: null,
+    };
+  });
+
+const profileInput = z.object({
+  full_name: z.string().optional().nullable(),
+  phone: z.string().optional().nullable(),
+  avatar_url: z.string().optional().nullable(),
+  date_of_birth: z.string().optional().nullable(), // YYYY-MM-DD
+  parent_name: z.string().optional().nullable(),
+  parent_phone: z.string().optional().nullable(),
+  address: z.string().optional().nullable(),
+  school_college: z.string().optional().nullable(),
+  class_level: z.string().optional().nullable(),
+  board: z.string().optional().nullable(),
+});
+
+export const updateMyProfile = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => profileInput.parse(d))
+  .handler(async ({ context, data }) => {
+    const payload: Record<string, unknown> = { id: context.userId };
+    Object.entries(data).forEach(([k, v]) => { payload[k] = v || null; });
+    const { error } = await context.supabase
+      .from("profiles").upsert(payload, { onConflict: "id" });
+    if (error) throw new Error(error.message);
+    return { ok: true };
   });
