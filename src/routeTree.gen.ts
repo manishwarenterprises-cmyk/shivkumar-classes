@@ -27,11 +27,19 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AuthenticatedStoreRouteImport } from './routes/_authenticated/store'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedMyPurchasesRouteImport } from './routes/_authenticated/my-purchases'
 import { Route as AuthenticatedLearnRouteImport } from './routes/_authenticated/learn'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedStoreCourseRouteImport } from './routes/_authenticated/store.$course'
 import { Route as AuthenticatedLearnSlugRouteImport } from './routes/_authenticated/learn.$slug'
+import { Route as AuthenticatedAdminStoreRouteImport } from './routes/_authenticated/admin.store'
 import { Route as AuthenticatedAdminCoursesRouteImport } from './routes/_authenticated/admin.courses'
+import { Route as AuthenticatedAdminAnnouncementsRouteImport } from './routes/_authenticated/admin.announcements'
+import { Route as AuthenticatedStoreCourseSubjectRouteImport } from './routes/_authenticated/store.$course.$subject'
+import { Route as AuthenticatedStoreCourseSubjectChapterRouteImport } from './routes/_authenticated/store.$course.$subject.$chapter'
 
 const TestimonialsRoute = TestimonialsRouteImport.update({
   id: '/testimonials',
@@ -122,6 +130,22 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AuthenticatedStoreRoute = AuthenticatedStoreRouteImport.update({
+  id: '/store',
+  path: '/store',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMyPurchasesRoute =
+  AuthenticatedMyPurchasesRouteImport.update({
+    id: '/my-purchases',
+    path: '/my-purchases',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedLearnRoute = AuthenticatedLearnRouteImport.update({
   id: '/learn',
   path: '/learn',
@@ -137,16 +161,45 @@ const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedStoreCourseRoute =
+  AuthenticatedStoreCourseRouteImport.update({
+    id: '/$course',
+    path: '/$course',
+    getParentRoute: () => AuthenticatedStoreRoute,
+  } as any)
 const AuthenticatedLearnSlugRoute = AuthenticatedLearnSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => AuthenticatedLearnRoute,
+} as any)
+const AuthenticatedAdminStoreRoute = AuthenticatedAdminStoreRouteImport.update({
+  id: '/store',
+  path: '/store',
+  getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
 const AuthenticatedAdminCoursesRoute =
   AuthenticatedAdminCoursesRouteImport.update({
     id: '/courses',
     path: '/courses',
     getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminAnnouncementsRoute =
+  AuthenticatedAdminAnnouncementsRouteImport.update({
+    id: '/announcements',
+    path: '/announcements',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedStoreCourseSubjectRoute =
+  AuthenticatedStoreCourseSubjectRouteImport.update({
+    id: '/$subject',
+    path: '/$subject',
+    getParentRoute: () => AuthenticatedStoreCourseRoute,
+  } as any)
+const AuthenticatedStoreCourseSubjectChapterRoute =
+  AuthenticatedStoreCourseSubjectChapterRouteImport.update({
+    id: '/$chapter',
+    path: '/$chapter',
+    getParentRoute: () => AuthenticatedStoreCourseSubjectRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -168,10 +221,18 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/learn': typeof AuthenticatedLearnRouteWithChildren
+  '/my-purchases': typeof AuthenticatedMyPurchasesRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/store': typeof AuthenticatedStoreRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/courses': typeof AuthenticatedAdminCoursesRoute
+  '/admin/store': typeof AuthenticatedAdminStoreRoute
   '/learn/$slug': typeof AuthenticatedLearnSlugRoute
+  '/store/$course': typeof AuthenticatedStoreCourseRouteWithChildren
+  '/store/$course/$subject': typeof AuthenticatedStoreCourseSubjectRouteWithChildren
+  '/store/$course/$subject/$chapter': typeof AuthenticatedStoreCourseSubjectChapterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -192,10 +253,18 @@ export interface FileRoutesByTo {
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/learn': typeof AuthenticatedLearnRouteWithChildren
+  '/my-purchases': typeof AuthenticatedMyPurchasesRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/store': typeof AuthenticatedStoreRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/courses': typeof AuthenticatedAdminCoursesRoute
+  '/admin/store': typeof AuthenticatedAdminStoreRoute
   '/learn/$slug': typeof AuthenticatedLearnSlugRoute
+  '/store/$course': typeof AuthenticatedStoreCourseRouteWithChildren
+  '/store/$course/$subject': typeof AuthenticatedStoreCourseSubjectRouteWithChildren
+  '/store/$course/$subject/$chapter': typeof AuthenticatedStoreCourseSubjectChapterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -218,10 +287,18 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/learn': typeof AuthenticatedLearnRouteWithChildren
+  '/_authenticated/my-purchases': typeof AuthenticatedMyPurchasesRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/store': typeof AuthenticatedStoreRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/_authenticated/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/_authenticated/admin/courses': typeof AuthenticatedAdminCoursesRoute
+  '/_authenticated/admin/store': typeof AuthenticatedAdminStoreRoute
   '/_authenticated/learn/$slug': typeof AuthenticatedLearnSlugRoute
+  '/_authenticated/store/$course': typeof AuthenticatedStoreCourseRouteWithChildren
+  '/_authenticated/store/$course/$subject': typeof AuthenticatedStoreCourseSubjectRouteWithChildren
+  '/_authenticated/store/$course/$subject/$chapter': typeof AuthenticatedStoreCourseSubjectChapterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -244,10 +321,18 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dashboard'
     | '/learn'
+    | '/my-purchases'
+    | '/profile'
+    | '/store'
     | '/blog/$slug'
     | '/courses/$slug'
+    | '/admin/announcements'
     | '/admin/courses'
+    | '/admin/store'
     | '/learn/$slug'
+    | '/store/$course'
+    | '/store/$course/$subject'
+    | '/store/$course/$subject/$chapter'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -268,10 +353,18 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dashboard'
     | '/learn'
+    | '/my-purchases'
+    | '/profile'
+    | '/store'
     | '/blog/$slug'
     | '/courses/$slug'
+    | '/admin/announcements'
     | '/admin/courses'
+    | '/admin/store'
     | '/learn/$slug'
+    | '/store/$course'
+    | '/store/$course/$subject'
+    | '/store/$course/$subject/$chapter'
   id:
     | '__root__'
     | '/'
@@ -293,10 +386,18 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/_authenticated/learn'
+    | '/_authenticated/my-purchases'
+    | '/_authenticated/profile'
+    | '/_authenticated/store'
     | '/blog/$slug'
     | '/courses/$slug'
+    | '/_authenticated/admin/announcements'
     | '/_authenticated/admin/courses'
+    | '/_authenticated/admin/store'
     | '/_authenticated/learn/$slug'
+    | '/_authenticated/store/$course'
+    | '/_authenticated/store/$course/$subject'
+    | '/_authenticated/store/$course/$subject/$chapter'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -446,6 +547,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/_authenticated/store': {
+      id: '/_authenticated/store'
+      path: '/store'
+      fullPath: '/store'
+      preLoaderRoute: typeof AuthenticatedStoreRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/my-purchases': {
+      id: '/_authenticated/my-purchases'
+      path: '/my-purchases'
+      fullPath: '/my-purchases'
+      preLoaderRoute: typeof AuthenticatedMyPurchasesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/learn': {
       id: '/_authenticated/learn'
       path: '/learn'
@@ -467,12 +589,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/store/$course': {
+      id: '/_authenticated/store/$course'
+      path: '/$course'
+      fullPath: '/store/$course'
+      preLoaderRoute: typeof AuthenticatedStoreCourseRouteImport
+      parentRoute: typeof AuthenticatedStoreRoute
+    }
     '/_authenticated/learn/$slug': {
       id: '/_authenticated/learn/$slug'
       path: '/$slug'
       fullPath: '/learn/$slug'
       preLoaderRoute: typeof AuthenticatedLearnSlugRouteImport
       parentRoute: typeof AuthenticatedLearnRoute
+    }
+    '/_authenticated/admin/store': {
+      id: '/_authenticated/admin/store'
+      path: '/store'
+      fullPath: '/admin/store'
+      preLoaderRoute: typeof AuthenticatedAdminStoreRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/courses': {
       id: '/_authenticated/admin/courses'
@@ -481,15 +617,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminCoursesRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/announcements': {
+      id: '/_authenticated/admin/announcements'
+      path: '/announcements'
+      fullPath: '/admin/announcements'
+      preLoaderRoute: typeof AuthenticatedAdminAnnouncementsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/store/$course/$subject': {
+      id: '/_authenticated/store/$course/$subject'
+      path: '/$subject'
+      fullPath: '/store/$course/$subject'
+      preLoaderRoute: typeof AuthenticatedStoreCourseSubjectRouteImport
+      parentRoute: typeof AuthenticatedStoreCourseRoute
+    }
+    '/_authenticated/store/$course/$subject/$chapter': {
+      id: '/_authenticated/store/$course/$subject/$chapter'
+      path: '/$chapter'
+      fullPath: '/store/$course/$subject/$chapter'
+      preLoaderRoute: typeof AuthenticatedStoreCourseSubjectChapterRouteImport
+      parentRoute: typeof AuthenticatedStoreCourseSubjectRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminAnnouncementsRoute: typeof AuthenticatedAdminAnnouncementsRoute
   AuthenticatedAdminCoursesRoute: typeof AuthenticatedAdminCoursesRoute
+  AuthenticatedAdminStoreRoute: typeof AuthenticatedAdminStoreRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminAnnouncementsRoute: AuthenticatedAdminAnnouncementsRoute,
   AuthenticatedAdminCoursesRoute: AuthenticatedAdminCoursesRoute,
+  AuthenticatedAdminStoreRoute: AuthenticatedAdminStoreRoute,
 }
 
 const AuthenticatedAdminRouteWithChildren =
@@ -506,16 +667,63 @@ const AuthenticatedLearnRouteChildren: AuthenticatedLearnRouteChildren = {
 const AuthenticatedLearnRouteWithChildren =
   AuthenticatedLearnRoute._addFileChildren(AuthenticatedLearnRouteChildren)
 
+interface AuthenticatedStoreCourseSubjectRouteChildren {
+  AuthenticatedStoreCourseSubjectChapterRoute: typeof AuthenticatedStoreCourseSubjectChapterRoute
+}
+
+const AuthenticatedStoreCourseSubjectRouteChildren: AuthenticatedStoreCourseSubjectRouteChildren =
+  {
+    AuthenticatedStoreCourseSubjectChapterRoute:
+      AuthenticatedStoreCourseSubjectChapterRoute,
+  }
+
+const AuthenticatedStoreCourseSubjectRouteWithChildren =
+  AuthenticatedStoreCourseSubjectRoute._addFileChildren(
+    AuthenticatedStoreCourseSubjectRouteChildren,
+  )
+
+interface AuthenticatedStoreCourseRouteChildren {
+  AuthenticatedStoreCourseSubjectRoute: typeof AuthenticatedStoreCourseSubjectRouteWithChildren
+}
+
+const AuthenticatedStoreCourseRouteChildren: AuthenticatedStoreCourseRouteChildren =
+  {
+    AuthenticatedStoreCourseSubjectRoute:
+      AuthenticatedStoreCourseSubjectRouteWithChildren,
+  }
+
+const AuthenticatedStoreCourseRouteWithChildren =
+  AuthenticatedStoreCourseRoute._addFileChildren(
+    AuthenticatedStoreCourseRouteChildren,
+  )
+
+interface AuthenticatedStoreRouteChildren {
+  AuthenticatedStoreCourseRoute: typeof AuthenticatedStoreCourseRouteWithChildren
+}
+
+const AuthenticatedStoreRouteChildren: AuthenticatedStoreRouteChildren = {
+  AuthenticatedStoreCourseRoute: AuthenticatedStoreCourseRouteWithChildren,
+}
+
+const AuthenticatedStoreRouteWithChildren =
+  AuthenticatedStoreRoute._addFileChildren(AuthenticatedStoreRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedLearnRoute: typeof AuthenticatedLearnRouteWithChildren
+  AuthenticatedMyPurchasesRoute: typeof AuthenticatedMyPurchasesRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedStoreRoute: typeof AuthenticatedStoreRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedLearnRoute: AuthenticatedLearnRouteWithChildren,
+  AuthenticatedMyPurchasesRoute: AuthenticatedMyPurchasesRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedStoreRoute: AuthenticatedStoreRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -563,13 +771,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

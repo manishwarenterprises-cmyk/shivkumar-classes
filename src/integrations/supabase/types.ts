@@ -14,6 +14,80 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          audience: string
+          body: string
+          created_at: string
+          id: string
+          is_published: boolean
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audience?: string
+          body: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audience?: string
+          body?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      chapters: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_published: boolean
+          order_index: number
+          slug: string
+          subject_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          order_index?: number
+          slug: string
+          subject_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          order_index?: number
+          slug?: string
+          subject_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chapters_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       courses: {
         Row: {
           cover_url: string | null
@@ -191,30 +265,201 @@ export type Database = {
       }
       profiles: {
         Row: {
+          address: string | null
           avatar_url: string | null
+          board: string | null
+          class_level: string | null
           created_at: string
+          date_of_birth: string | null
           full_name: string | null
           id: string
+          parent_name: string | null
+          parent_phone: string | null
           phone: string | null
+          school_college: string | null
           updated_at: string
         }
         Insert: {
+          address?: string | null
           avatar_url?: string | null
+          board?: string | null
+          class_level?: string | null
           created_at?: string
+          date_of_birth?: string | null
           full_name?: string | null
           id: string
+          parent_name?: string | null
+          parent_phone?: string | null
           phone?: string | null
+          school_college?: string | null
           updated_at?: string
         }
         Update: {
+          address?: string | null
           avatar_url?: string | null
+          board?: string | null
+          class_level?: string | null
           created_at?: string
+          date_of_birth?: string | null
           full_name?: string | null
           id?: string
+          parent_name?: string | null
+          parent_phone?: string | null
           phone?: string | null
+          school_college?: string | null
           updated_at?: string
         }
         Relationships: []
+      }
+      purchases: {
+        Row: {
+          amount_paise: number
+          created_at: string
+          id: string
+          item_id: string
+          payment_provider: string
+          payment_ref: string | null
+          purchased_at: string | null
+          status: Database["public"]["Enums"]["purchase_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_paise: number
+          created_at?: string
+          id?: string
+          item_id: string
+          payment_provider?: string
+          payment_ref?: string | null
+          purchased_at?: string | null
+          status?: Database["public"]["Enums"]["purchase_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_paise?: number
+          created_at?: string
+          id?: string
+          item_id?: string
+          payment_provider?: string
+          payment_ref?: string | null
+          purchased_at?: string | null
+          status?: Database["public"]["Enums"]["purchase_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchases_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "store_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      store_items: {
+        Row: {
+          bundle_item_ids: string[]
+          chapter_id: string
+          content_url: string | null
+          created_at: string
+          description: string | null
+          file_url: string | null
+          id: string
+          is_published: boolean
+          kind: Database["public"]["Enums"]["store_item_kind"]
+          order_index: number
+          preview_url: string | null
+          price_paise: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          bundle_item_ids?: string[]
+          chapter_id: string
+          content_url?: string | null
+          created_at?: string
+          description?: string | null
+          file_url?: string | null
+          id?: string
+          is_published?: boolean
+          kind: Database["public"]["Enums"]["store_item_kind"]
+          order_index?: number
+          preview_url?: string | null
+          price_paise?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          bundle_item_ids?: string[]
+          chapter_id?: string
+          content_url?: string | null
+          created_at?: string
+          description?: string | null
+          file_url?: string | null
+          id?: string
+          is_published?: boolean
+          kind?: Database["public"]["Enums"]["store_item_kind"]
+          order_index?: number
+          preview_url?: string | null
+          price_paise?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "store_items_chapter_id_fkey"
+            columns: ["chapter_id"]
+            isOneToOne: false
+            referencedRelation: "chapters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subjects: {
+        Row: {
+          course_id: string
+          created_at: string
+          description: string | null
+          id: string
+          is_published: boolean
+          order_index: number
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          order_index?: number
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean
+          order_index?: number
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subjects_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -242,6 +487,45 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_list_store_items: {
+        Args: { _chapter_id: string }
+        Returns: {
+          bundle_item_ids: string[]
+          chapter_id: string
+          content_url: string | null
+          created_at: string
+          description: string | null
+          file_url: string | null
+          id: string
+          is_published: boolean
+          kind: Database["public"]["Enums"]["store_item_kind"]
+          order_index: number
+          preview_url: string | null
+          price_paise: number
+          title: string
+          updated_at: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "store_items"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      get_store_item_content: {
+        Args: { _item_id: string }
+        Returns: {
+          content_url: string
+          file_url: string
+          kind: Database["public"]["Enums"]["store_item_kind"]
+          preview_url: string
+          title: string
+        }[]
+      }
+      has_item_access: {
+        Args: { _item_id: string; _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -256,6 +540,8 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "teacher" | "student"
+      purchase_status: "pending" | "paid" | "failed" | "refunded"
+      store_item_kind: "lecture" | "notes" | "test" | "bundle"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -384,6 +670,8 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "teacher", "student"],
+      purchase_status: ["pending", "paid", "failed", "refunded"],
+      store_item_kind: ["lecture", "notes", "test", "bundle"],
     },
   },
 } as const

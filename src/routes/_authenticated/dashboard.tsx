@@ -2,13 +2,15 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { BookOpen, Video, GraduationCap, Award, FileText, Calendar, LogOut, Shield, Loader2, PlayCircle } from "lucide-react";
+import { BookOpen, Video, GraduationCap, Award, FileText, Calendar, LogOut, Shield, Loader2, PlayCircle, Store as StoreIcon, ShoppingBag, User } from "lucide-react";
 import { Section } from "@/components/primitives";
 import { getAccountSummary } from "@/lib/account.functions";
 import { listMyEnrollments } from "@/lib/courses.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
+import { AnnouncementsStrip } from "@/components/AnnouncementsStrip";
+
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "My Dashboard · Shiv Sir's Education Hub" }] }),
@@ -40,7 +42,9 @@ function Dashboard() {
   return (
     <>
       <Toaster richColors position="top-center" />
+      <AnnouncementsStrip audience="students" />
       <Section className="pt-10">
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +58,16 @@ function Dashboard() {
             </h1>
             <p className="mt-3 text-muted-foreground">Your commerce journey, all in one place.</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
+            <Link to="/store" className="inline-flex items-center gap-2 rounded-2xl gradient-luxe text-white px-5 py-2.5 text-sm font-bold shadow-luxe">
+              <StoreIcon className="h-4 w-4" /> Store
+            </Link>
+            <Link to="/my-purchases" className="inline-flex items-center gap-2 rounded-2xl bg-white ring-1 ring-border px-5 py-2.5 text-sm font-medium hover:bg-muted/50">
+              <ShoppingBag className="h-4 w-4" /> Purchases
+            </Link>
+            <Link to="/profile" className="inline-flex items-center gap-2 rounded-2xl bg-white ring-1 ring-border px-5 py-2.5 text-sm font-medium hover:bg-muted/50">
+              <User className="h-4 w-4" /> Profile
+            </Link>
             {isAdmin && (
               <Link to="/admin" className="inline-flex items-center gap-2 rounded-2xl bg-foreground text-background px-5 py-2.5 text-sm font-medium shadow-soft">
                 <Shield className="h-4 w-4" /> Admin
@@ -64,6 +77,7 @@ function Dashboard() {
               <LogOut className="h-4 w-4" /> Sign out
             </button>
           </div>
+
         </motion.div>
       </Section>
 
