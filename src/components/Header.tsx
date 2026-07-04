@@ -70,18 +70,18 @@ export function Header() {
             {signedIn ? (
               <Link
                 to="/dashboard"
-                className="hidden md:inline-flex items-center gap-2 rounded-xl gradient-luxe text-white px-4 py-2 text-sm font-medium shadow-soft hover:opacity-95 transition"
+                className="inline-flex items-center gap-2 rounded-xl gradient-luxe text-white px-3 md:px-4 py-2 text-sm font-medium shadow-soft hover:opacity-95 transition"
               >
                 <LayoutDashboard className="h-4 w-4" />
-                Dashboard
+                <span className="hidden sm:inline">Dashboard</span>
               </Link>
             ) : (
               <Link
                 to="/auth"
-                className="hidden md:inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-border px-4 py-2 text-sm font-medium hover:bg-muted/50 transition"
+                className="inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-border px-3 md:px-4 py-2 text-sm font-medium hover:bg-muted/50 transition"
               >
                 <LogIn className="h-4 w-4" />
-                Sign In
+                <span className="hidden sm:inline">Sign In</span>
               </Link>
             )}
             <a
@@ -122,6 +122,24 @@ export function Header() {
                     {item.label}
                   </Link>
                 ))}
+                <div className="my-1 h-px bg-border" />
+                {signedIn ? (
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setOpen(false)}
+                    className="px-3 py-2.5 rounded-lg text-sm hover:bg-muted text-foreground inline-flex items-center gap-2"
+                  >
+                    <LayoutDashboard className="h-4 w-4" /> My Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    to="/auth"
+                    onClick={() => setOpen(false)}
+                    className="px-3 py-2.5 rounded-lg text-sm hover:bg-muted text-foreground inline-flex items-center gap-2"
+                  >
+                    <LogIn className="h-4 w-4" /> Sign In / Register
+                  </Link>
+                )}
                 <a
                   href={`https://wa.me/${SITE.whatsapp}`}
                   className="mt-2 text-center rounded-lg bg-foreground text-background py-2.5 text-sm font-medium"
