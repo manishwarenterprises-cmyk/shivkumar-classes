@@ -70,18 +70,18 @@ export function Header() {
             {signedIn ? (
               <Link
                 to="/dashboard"
-                className="hidden md:inline-flex items-center gap-2 rounded-xl gradient-luxe text-white px-4 py-2 text-sm font-medium shadow-soft hover:opacity-95 transition"
+                className="inline-flex items-center gap-2 rounded-xl gradient-luxe text-white px-3 md:px-4 py-2 text-sm font-medium shadow-soft hover:opacity-95 transition"
               >
                 <LayoutDashboard className="h-4 w-4" />
-                Dashboard
+                <span className="hidden sm:inline">Dashboard</span>
               </Link>
             ) : (
               <Link
                 to="/auth"
-                className="hidden md:inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-border px-4 py-2 text-sm font-medium hover:bg-muted/50 transition"
+                className="inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-border px-3 md:px-4 py-2 text-sm font-medium hover:bg-muted/50 transition"
               >
                 <LogIn className="h-4 w-4" />
-                Sign In
+                <span className="hidden sm:inline">Sign In</span>
               </Link>
             )}
             <a
