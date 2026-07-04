@@ -551,7 +551,6 @@ export type Database = {
         }
         Returns: boolean
       }
-      is_admin_email: { Args: { _email: string }; Returns: boolean }
       is_enrolled: {
         Args: { _course_id: string; _user_id: string }
         Returns: boolean
