@@ -102,8 +102,14 @@ function Home() {
       </section>
 
       {/* FOUNDER STRIP */}
-      <Section>
-        <div className="grid lg:grid-cols-5 gap-10 items-center">
+      <Section className="overflow-hidden">
+        <AmbientOrbs
+          orbs={[
+            { size: 360, top: "-8%", right: "-6%", color: "rgba(155,120,230,0.28)", parallax: -70 },
+            { size: 260, top: "55%", left: "-4%", color: "rgba(198,169,105,0.22)", parallax: 50, delay: -3 },
+          ]}
+        />
+        <div className="grid lg:grid-cols-5 gap-10 items-center relative">
           <Reveal className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
