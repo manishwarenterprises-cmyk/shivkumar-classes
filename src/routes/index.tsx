@@ -45,10 +45,12 @@ function Home() {
           <motion.h1
             initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] text-balance max-w-5xl"
+            transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 font-display text-5xl md:text-7xl lg:text-8xl leading-[0.98] text-balance max-w-5xl tracking-[-0.04em]"
           >
-            Building <span className="gold-text">Future Commerce</span> Leaders Since 2012
+            Building <span className="gold-text italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 60' }}>Future Commerce</span>
+            <br className="hidden md:block" />
+            Leaders <span className="text-muted-foreground/70 italic font-light">since</span> 2012
           </motion.h1>
           <Reveal delay={0.4}>
             <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl text-pretty leading-relaxed">
