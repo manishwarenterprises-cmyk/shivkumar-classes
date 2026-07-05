@@ -125,6 +125,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <LedgerIntro />
+      <RainOverlay />
       <ScrollProgress />
       <Header />
       <main className="pt-24">
