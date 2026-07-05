@@ -11,6 +11,8 @@ import { CommerceStaircase } from "@/components/CommerceStaircase";
 import { RocketLaunch } from "@/components/RocketLaunch";
 import { CertificateCard } from "@/components/CertificateCard";
 import { AnnouncementsStrip } from "@/components/AnnouncementsStrip";
+import { AmbientOrbs } from "@/components/AmbientOrbs";
+import { ConversationCTA } from "@/components/ConversationCTA";
 import shivSir from "@/assets/shiv-sir-new.png.asset.json";
 
 
