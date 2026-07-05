@@ -310,6 +310,9 @@ function Home() {
         </div>
       </Section>
 
+      {/* CONVERSATIONAL CTA */}
+      <ConversationCTA />
+
       {/* FINAL CTA */}
       <Section>
         <Reveal>
