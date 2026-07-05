@@ -1,23 +1,13 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MessageCircle, LayoutDashboard, LogIn } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
-import { supabase } from "@/integrations/supabase/client";
 import ehLogo from "@/assets/eh-logo.png.asset.json";
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [signedIn, setSignedIn] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
-      setSignedIn(!!session);
-    });
-    return () => sub.subscription.unsubscribe();
-  }, []);
 
   return (
     <motion.header
@@ -29,14 +19,14 @@ export function Header() {
       <div className="mx-auto mt-4 max-w-7xl px-4">
         <div className="glass shadow-soft flex items-center justify-between rounded-2xl px-5 py-3">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="h-11 w-11 rounded-full bg-foreground grid place-items-center overflow-hidden ring-1 ring-luxury/40 shadow-luxe">
+            <div className="h-11 w-11 rounded-full grid place-items-center overflow-hidden">
               <img src={ehLogo.url} alt="Shiv Sir's Education Hub" className="h-full w-full object-contain" />
             </div>
             <div className="leading-tight">
-              <div className="font-display text-base font-semibold text-foreground">
+              <div className="font-display text-base font-semibold text-foreground tracking-tight">
                 Shiv Sir's
               </div>
-              <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <div className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
                 Education Hub
               </div>
             </div>
@@ -67,31 +57,14 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            {signedIn ? (
-              <Link
-                to="/dashboard"
-                className="inline-flex items-center gap-2 rounded-xl gradient-luxe text-white px-3 md:px-4 py-2 text-sm font-medium shadow-soft hover:opacity-95 transition"
-              >
-                <LayoutDashboard className="h-4 w-4" />
-                <span className="hidden sm:inline">Dashboard</span>
-              </Link>
-            ) : (
-              <Link
-                to="/auth"
-                className="inline-flex items-center gap-2 rounded-xl bg-white ring-1 ring-border px-3 md:px-4 py-2 text-sm font-medium hover:bg-muted/50 transition"
-              >
-                <LogIn className="h-4 w-4" />
-                <span className="hidden sm:inline">Sign In</span>
-              </Link>
-            )}
             <a
               href={`https://wa.me/${SITE.whatsapp}`}
               target="_blank"
               rel="noreferrer"
-              className="hidden md:inline-flex items-center gap-2 rounded-xl bg-foreground text-background px-4 py-2 text-sm font-medium hover:opacity-90 transition shadow-soft"
+              className="inline-flex items-center gap-2 rounded-xl bg-foreground text-background px-3 md:px-4 py-2 text-sm font-medium hover:opacity-90 transition shadow-soft"
             >
               <MessageCircle className="h-4 w-4" />
-              Book Demo
+              <span className="hidden sm:inline">Book Demo</span>
             </a>
             <button
               className="lg:hidden p-2 rounded-lg hover:bg-muted"
@@ -122,24 +95,6 @@ export function Header() {
                     {item.label}
                   </Link>
                 ))}
-                <div className="my-1 h-px bg-border" />
-                {signedIn ? (
-                  <Link
-                    to="/dashboard"
-                    onClick={() => setOpen(false)}
-                    className="px-3 py-2.5 rounded-lg text-sm hover:bg-muted text-foreground inline-flex items-center gap-2"
-                  >
-                    <LayoutDashboard className="h-4 w-4" /> My Dashboard
-                  </Link>
-                ) : (
-                  <Link
-                    to="/auth"
-                    onClick={() => setOpen(false)}
-                    className="px-3 py-2.5 rounded-lg text-sm hover:bg-muted text-foreground inline-flex items-center gap-2"
-                  >
-                    <LogIn className="h-4 w-4" /> Sign In / Register
-                  </Link>
-                )}
                 <a
                   href={`https://wa.me/${SITE.whatsapp}`}
                   className="mt-2 text-center rounded-lg bg-foreground text-background py-2.5 text-sm font-medium"
