@@ -152,7 +152,8 @@ function Home() {
       </Section>
 
       {/* COURSES PREVIEW */}
-      <Section>
+      <Section className="overflow-hidden">
+        <AmbientOrbs />
         <SectionHeader
           eyebrow="What We Teach"
           title={<>A commerce curriculum, <span className="gold-text">crafted with care</span></>}
