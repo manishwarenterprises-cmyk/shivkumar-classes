@@ -157,11 +157,11 @@ export function LedgerIntro() {
                         "radial-gradient(circle, rgba(255,215,140,0.7), transparent 70%)",
                     }}
                   />
-                  <div className="relative h-40 w-40 md:h-52 md:w-52 rounded-full bg-black ring-4 ring-luxury grid place-items-center overflow-hidden shadow-[0_0_80px_rgba(198,169,105,0.85)]">
+                  <div className="relative h-40 w-40 md:h-52 md:w-52 rounded-full grid place-items-center overflow-hidden">
                     <img
                       src={ehLogo.url}
                       alt="Shiv Sir's Education Hub"
-                      className="h-[115%] w-[115%] object-cover scale-110"
+                      className="h-full w-full object-contain"
                     />
                   </div>
                 </div>

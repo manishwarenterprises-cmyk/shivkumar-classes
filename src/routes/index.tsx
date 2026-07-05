@@ -11,6 +11,8 @@ import { CommerceStaircase } from "@/components/CommerceStaircase";
 import { RocketLaunch } from "@/components/RocketLaunch";
 import { CertificateCard } from "@/components/CertificateCard";
 import { AnnouncementsStrip } from "@/components/AnnouncementsStrip";
+import { AmbientOrbs } from "@/components/AmbientOrbs";
+import { ConversationCTA } from "@/components/ConversationCTA";
 import shivSir from "@/assets/shiv-sir-new.png.asset.json";
 
 
@@ -43,10 +45,12 @@ function Home() {
           <motion.h1
             initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 font-display text-5xl md:text-7xl lg:text-8xl leading-[1.02] text-balance max-w-5xl"
+            transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6 font-display text-5xl md:text-7xl lg:text-8xl leading-[0.98] text-balance max-w-5xl tracking-[-0.04em]"
           >
-            Building <span className="gold-text">Future Commerce</span> Leaders Since 2012
+            Building <span className="gold-text italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 60' }}>Future Commerce</span>
+            <br className="hidden md:block" />
+            Leaders <span className="text-muted-foreground/70 italic font-light">since</span> 2012
           </motion.h1>
           <Reveal delay={0.4}>
             <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl text-pretty leading-relaxed">
@@ -98,8 +102,14 @@ function Home() {
       </section>
 
       {/* FOUNDER STRIP */}
-      <Section>
-        <div className="grid lg:grid-cols-5 gap-10 items-center">
+      <Section className="overflow-hidden">
+        <AmbientOrbs
+          orbs={[
+            { size: 360, top: "-8%", right: "-6%", color: "rgba(155,120,230,0.28)", parallax: -70 },
+            { size: 260, top: "55%", left: "-4%", color: "rgba(198,169,105,0.22)", parallax: 50, delay: -3 },
+          ]}
+        />
+        <div className="grid lg:grid-cols-5 gap-10 items-center relative">
           <Reveal className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -142,7 +152,8 @@ function Home() {
       </Section>
 
       {/* COURSES PREVIEW */}
-      <Section>
+      <Section className="overflow-hidden">
+        <AmbientOrbs />
         <SectionHeader
           eyebrow="What We Teach"
           title={<>A commerce curriculum, <span className="gold-text">crafted with care</span></>}
@@ -222,7 +233,13 @@ function Home() {
       </Section>
 
       {/* TESTIMONIAL PREVIEW */}
-      <Section>
+      <Section className="overflow-hidden">
+        <AmbientOrbs
+          orbs={[
+            { size: 320, top: "-5%", left: "-4%", color: "rgba(198,169,105,0.22)", parallax: -50 },
+            { size: 280, top: "60%", right: "-6%", color: "rgba(155,120,230,0.24)", parallax: 60, delay: -3 },
+          ]}
+        />
         <SectionHeader
           eyebrow="Trusted by Parents & Students"
           title={<>Real reviews from real <span className="gold-text">Google</span> students</>}
@@ -292,6 +309,9 @@ function Home() {
           </Reveal>
         </div>
       </Section>
+
+      {/* CONVERSATIONAL CTA */}
+      <ConversationCTA />
 
       {/* FINAL CTA */}
       <Section>

@@ -20,6 +20,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { LedgerIntro } from "@/components/LedgerIntro";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { CursorGlow } from "@/components/CursorGlow";
+import { RainOverlay } from "@/components/RainOverlay";
 
 function NotFoundComponent() {
   return (
@@ -124,6 +125,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <LedgerIntro />
+      <RainOverlay />
       <ScrollProgress />
       <Header />
       <main className="pt-24">
