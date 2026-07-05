@@ -233,7 +233,13 @@ function Home() {
       </Section>
 
       {/* TESTIMONIAL PREVIEW */}
-      <Section>
+      <Section className="overflow-hidden">
+        <AmbientOrbs
+          orbs={[
+            { size: 320, top: "-5%", left: "-4%", color: "rgba(198,169,105,0.22)", parallax: -50 },
+            { size: 280, top: "60%", right: "-6%", color: "rgba(155,120,230,0.24)", parallax: 60, delay: -3 },
+          ]}
+        />
         <SectionHeader
           eyebrow="Trusted by Parents & Students"
           title={<>Real reviews from real <span className="gold-text">Google</span> students</>}
