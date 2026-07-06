@@ -1,17 +1,32 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { Section, SectionHeader, Reveal } from "@/components/primitives";
+import { FAQBlock, faqSchema, type FAQ } from "@/components/FAQBlock";
 import { COURSES } from "@/lib/site";
 import { ArrowRight, GraduationCap, Clock } from "lucide-react";
+
+const CANONICAL = "https://shivkumar-classes.lovable.app/courses";
+
+const COURSE_FAQS: FAQ[] = [
+  { q: "Which boards do you cover for 11th and 12th Commerce?", a: "CBSE, Maharashtra State Board (HSC) and ICSE — with separate batches so teaching stays aligned to each board's pattern and weightage." },
+  { q: "What subjects are taught in 11th and 12th Commerce?", a: "Accountancy, Economics, Business Studies, OCM/SP (HSC) and Mathematics or Applied Maths. English support is offered on request." },
+  { q: "Do you teach B.Com and BBA at the university level?", a: "Yes. We run semester-wise tuition for B.Com and BBA students of Nagpur University — covering Financial Accounting, Business Law, Cost Accounting, Taxation, Auditing and management papers." },
+  { q: "How large are the batches?", a: "Every batch is capped at 20 students. This lets Shiv Sir track individual progress every week and give personal doubt sessions when needed." },
+  { q: "Are printed notes and mock tests included?", a: "Yes — all courses include printed chapter notes, weekly tests and 10+ mock boards for 12th students, at no extra cost." },
+  { q: "Do you offer online classes?", a: "Yes. Live online batches run in parallel to offline classes for 11th, 12th and CBSE Commerce. Class recordings are shared within 2 hours." },
+];
 
 export const Route = createFileRoute("/courses")({
   head: () => ({
     meta: [
-      { title: "Courses — Shiv Sir's Education Hub" },
-      { name: "description", content: "Commerce coaching for 11th, 12th, CBSE, Maharashtra Board, B.Com and BBA students in Nagpur." },
-      { property: "og:title", content: "Courses — Shiv Sir's Education Hub" },
-      { property: "og:description", content: "Explore our complete commerce coaching programmes." },
+      { title: "Commerce Coaching Courses in Nagpur — 11th, 12th, B.Com, BBA" },
+      { name: "description", content: "Complete commerce coaching in Nagpur — 11th, 12th, CBSE, Maharashtra Board, B.Com and BBA. Personal mentorship, printed notes and mock boards included." },
+      { property: "og:title", content: "Commerce Coaching Courses — Shiv Sir's Education Hub, Nagpur" },
+      { property: "og:description", content: "Explore our complete commerce coaching programmes for 11th, 12th, B.Com and BBA students." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: CANONICAL },
     ],
-    links: [{ rel: "canonical", href: "/courses" }],
+    links: [{ rel: "canonical", href: CANONICAL }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(faqSchema(COURSE_FAQS)) }],
   }),
   component: CoursesLayout,
 });
@@ -57,6 +72,12 @@ function CoursesLayout() {
           ))}
         </div>
       </Section>
+
+      <FAQBlock
+        eyebrow="Courses FAQ"
+        title={<>Choosing the <span className="gold-text">right programme</span></>}
+        faqs={COURSE_FAQS}
+      />
     </>
   );
 }
