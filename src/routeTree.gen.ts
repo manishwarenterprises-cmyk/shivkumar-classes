@@ -13,7 +13,9 @@ import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResultsRouteImport } from './routes/results'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FeesRouteImport } from './routes/fees'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as CoursesRouteImport } from './routes/courses'
@@ -61,9 +63,19 @@ const ResourcesRoute = ResourcesRouteImport.update({
   path: '/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocationsRoute = LocationsRouteImport.update({
+  id: '/locations',
+  path: '/locations',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeesRoute = FeesRouteImport.update({
+  id: '/fees',
+  path: '/fees',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -213,7 +225,9 @@ export interface FileRoutesByFullPath {
   '/courses': typeof CoursesRouteWithChildren
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
+  '/fees': typeof FeesRoute
   '/gallery': typeof GalleryRoute
+  '/locations': typeof LocationsRoute
   '/resources': typeof ResourcesRoute
   '/results': typeof ResultsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -245,7 +259,9 @@ export interface FileRoutesByTo {
   '/courses': typeof CoursesRouteWithChildren
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
+  '/fees': typeof FeesRoute
   '/gallery': typeof GalleryRoute
+  '/locations': typeof LocationsRoute
   '/resources': typeof ResourcesRoute
   '/results': typeof ResultsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -279,7 +295,9 @@ export interface FileRoutesById {
   '/courses': typeof CoursesRouteWithChildren
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
+  '/fees': typeof FeesRoute
   '/gallery': typeof GalleryRoute
+  '/locations': typeof LocationsRoute
   '/resources': typeof ResourcesRoute
   '/results': typeof ResultsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -313,7 +331,9 @@ export interface FileRouteTypes {
     | '/courses'
     | '/downloads'
     | '/faq'
+    | '/fees'
     | '/gallery'
+    | '/locations'
     | '/resources'
     | '/results'
     | '/sitemap.xml'
@@ -345,7 +365,9 @@ export interface FileRouteTypes {
     | '/courses'
     | '/downloads'
     | '/faq'
+    | '/fees'
     | '/gallery'
+    | '/locations'
     | '/resources'
     | '/results'
     | '/sitemap.xml'
@@ -378,7 +400,9 @@ export interface FileRouteTypes {
     | '/courses'
     | '/downloads'
     | '/faq'
+    | '/fees'
     | '/gallery'
+    | '/locations'
     | '/resources'
     | '/results'
     | '/sitemap.xml'
@@ -412,7 +436,9 @@ export interface RootRouteChildren {
   CoursesRoute: typeof CoursesRouteWithChildren
   DownloadsRoute: typeof DownloadsRoute
   FaqRoute: typeof FaqRoute
+  FeesRoute: typeof FeesRoute
   GalleryRoute: typeof GalleryRoute
+  LocationsRoute: typeof LocationsRoute
   ResourcesRoute: typeof ResourcesRoute
   ResultsRoute: typeof ResultsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -449,11 +475,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/locations': {
+      id: '/locations'
+      path: '/locations'
+      fullPath: '/locations'
+      preLoaderRoute: typeof LocationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fees': {
+      id: '/fees'
+      path: '/fees'
+      fullPath: '/fees'
+      preLoaderRoute: typeof FeesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -762,7 +802,9 @@ const rootRouteChildren: RootRouteChildren = {
   CoursesRoute: CoursesRouteWithChildren,
   DownloadsRoute: DownloadsRoute,
   FaqRoute: FaqRoute,
+  FeesRoute: FeesRoute,
   GalleryRoute: GalleryRoute,
+  LocationsRoute: LocationsRoute,
   ResourcesRoute: ResourcesRoute,
   ResultsRoute: ResultsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

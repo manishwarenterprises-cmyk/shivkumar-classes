@@ -1,18 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Section, SectionHeader, Reveal } from "@/components/primitives";
+import { FAQBlock, faqSchema, type FAQ } from "@/components/FAQBlock";
 import { SITE } from "@/lib/site";
 import { ClipboardList, IdCard, CalendarCheck, Sparkles, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 
+const CANONICAL = "https://shivkumar-classes.lovable.app/admission";
+
+const ADMISSION_FAQS: FAQ[] = [
+  { q: "When do admissions open for the new academic session?", a: "Admissions open every year on March 1 and continue on a rolling basis until seats are filled. Early admissions before April 30 get a 5% discount and first pick of batch timings." },
+  { q: "Is the demo class really free?", a: "Yes. The demo is a complete 45-minute class with Shiv Sir — no sales pitch, no obligation. You experience the actual teaching style before deciding." },
+  { q: "What documents are needed at admission?", a: "Aadhaar card, last school report card, 2 passport photographs and parent contact details. Marksheets for prior boards if you're joining 12th or B.Com." },
+  { q: "Can I switch batches after joining?", a: "Yes. You can switch between morning, evening or weekend batches once per term based on availability, at no extra cost." },
+  { q: "Do you accept mid-session admissions?", a: "Yes, for 11th Commerce and B.Com/BBA until 30 days into the term. You'll get personalised catch-up sessions to cover missed chapters at no extra fee." },
+  { q: "How is the batch size decided?", a: "Every batch is capped at 20 students so Shiv Sir can personally track each student's weekly progress and doubt patterns." },
+];
+
 export const Route = createFileRoute("/admission")({
   head: () => ({
     meta: [
-      { title: "Admission — Shiv Sir's Education Hub" },
-      { name: "description", content: "Three simple steps to admission. Book a free demo class with Shiv Sir today." },
-      { property: "og:title", content: "Admission — Shiv Sir's Education Hub" },
-      { property: "og:description", content: "Book a free demo class." },
+      { title: "Commerce Coaching Admission Nagpur 2026 — Shiv Sir's Education Hub" },
+      { name: "description", content: "Admissions open for 11th, 12th, CBSE, HSC, B.Com and BBA commerce coaching in Nagpur. Book a free demo class with Shiv Sir in 3 simple steps." },
+      { property: "og:title", content: "Admissions Open 2026 — Shiv Sir's Education Hub, Nagpur" },
+      { property: "og:description", content: "Three simple steps, one free demo, personal mentorship from day one." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: CANONICAL },
     ],
-    links: [{ rel: "canonical", href: "/admission" }],
+    links: [{ rel: "canonical", href: CANONICAL }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(faqSchema(ADMISSION_FAQS)) }],
   }),
   component: Admission,
 });
@@ -100,6 +115,13 @@ function Admission() {
           </Reveal>
         </div>
       </Section>
+
+      <FAQBlock
+        eyebrow="Admission FAQ"
+        title={<>Common <span className="gold-text">admission questions</span></>}
+        subtitle="What parents and students ask us most before joining."
+        faqs={ADMISSION_FAQS}
+      />
     </>
   );
 }
