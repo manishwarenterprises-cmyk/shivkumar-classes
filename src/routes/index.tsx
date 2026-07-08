@@ -296,7 +296,7 @@ function Home() {
         <RocketLaunch />
       </Section>
 
-      {/* TESTIMONIAL PREVIEW */}
+      {/* PREMIUM ASSURANCE STRIP */}
       <Section className="overflow-hidden">
         <AmbientOrbs
           orbs={[
@@ -305,39 +305,30 @@ function Home() {
           ]}
         />
         <SectionHeader
-          eyebrow="Trusted by Parents & Students"
-          title={<>Real reviews from real <span className="gold-text">Google</span> students</>}
+          eyebrow="Our Commitment"
+          title={<>The <span className="gold-text">Shiv Sir promise</span> to every family</>}
+          subtitle="Not a slogan — a standard we're measured against, class after class."
         />
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 perspective-1000">
-          {TESTIMONIALS.slice(0, 3).map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.08}>
-              <CertificateCard>
-                <div className="text-[10px] uppercase tracking-[0.3em] text-luxury font-bold">Certificate of Trust</div>
-                <div className="mt-1 flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, k) => (
-                    <Star key={k} className="h-4 w-4 fill-luxury text-luxury" />
-                  ))}
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            { icon: ShieldCheck, title: "Verified Excellence", desc: "5.0 Google rating across 62+ verified parent & student reviews." },
+            { icon: Award, title: "13+ Years Legacy", desc: "A decade-plus of consistent 90+ board results and university toppers." },
+            { icon: Users, title: "Small-Batch Learning", desc: "Every student known by name, weakness and learning rhythm." },
+            { icon: Clock, title: "Flexible Batches", desc: "Morning, afternoon and evening slots aligned to your school schedule." },
+          ].map((f, i) => (
+            <Reveal key={f.title} delay={i * 0.06}>
+              <div className="h-full rounded-3xl bg-white ring-1 ring-border p-6 hover:shadow-luxe hover:-translate-y-1 hover:ring-luxury/40 transition-all">
+                <div className="h-11 w-11 rounded-2xl gradient-luxe grid place-items-center ring-1 ring-luxury/30">
+                  <f.icon className="h-5 w-5 text-luxury" />
                 </div>
-                <p className="mt-5 text-sm text-foreground leading-relaxed text-pretty italic">"{t.content}"</p>
-                <div className="mt-6 flex items-center gap-3 pt-5 border-t border-luxury/20">
-                  <div className="h-9 w-9 rounded-full gradient-luxe grid place-items-center text-white text-xs font-medium">
-                    {t.name.split(" ").map((n) => n[0]).join("")}
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold uppercase tracking-wide">{t.name}</div>
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-luxury">Verified Review</div>
-                  </div>
-                </div>
-              </CertificateCard>
+                <h3 className="mt-5 font-display text-lg text-foreground">{f.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+              </div>
             </Reveal>
           ))}
         </div>
-        <div className="mt-10 text-center">
-          <Link to="/testimonials" className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-accent">
-            Read all reviews <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
       </Section>
+
 
       {/* VISIT / MAP */}
       <Section>
