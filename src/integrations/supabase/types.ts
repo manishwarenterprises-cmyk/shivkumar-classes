@@ -506,7 +506,7 @@ export type Database = {
     }
     Functions: {
       admin_list_store_items: {
-        Args: { _chapter_id: string }
+        Args: { _chapter_id: string; _user_id: string }
         Returns: {
           bundle_item_ids: string[]
           chapter_id: string
@@ -531,7 +531,7 @@ export type Database = {
         }
       }
       get_store_item_content: {
-        Args: { _item_id: string }
+        Args: { _item_id: string; _user_id: string }
         Returns: {
           content_url: string
           file_url: string
