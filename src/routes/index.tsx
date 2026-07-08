@@ -44,7 +44,12 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: "Shiv Sir's Education Hub — Best Commerce Coaching in Nagpur" },
       { name: "twitter:description", content: "Trusted commerce coaching in Nagpur. 5.0 Google rating. Book a free demo." },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
+      { rel: "preconnect", href: "https://www.google.com" },
+      { rel: "dns-prefetch", href: "https://www.google.com" },
+    ],
+
     scripts: [
       {
         type: "application/ld+json",
