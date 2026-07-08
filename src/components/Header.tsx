@@ -20,7 +20,7 @@ export function Header() {
         <div className="glass shadow-soft flex items-center justify-between rounded-2xl px-5 py-3">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="h-11 w-11 rounded-full grid place-items-center overflow-hidden">
-              <img src={ehLogo.url} alt="Shiv Sir's Education Hub" className="h-full w-full object-contain" />
+              <img src={ehLogo.url} alt="Shiv Sir's Education Hub" width={40} height={40} decoding="async" fetchPriority="high" className="h-full w-full object-contain" />
             </div>
             <div className="leading-tight">
               <div className="font-display text-base font-semibold text-foreground tracking-tight">

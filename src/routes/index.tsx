@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Star, ArrowRight, MessageCircle, BookOpen, Trophy, Users, Sparkles, GraduationCap, CheckCircle2, MapPin, Phone, ShieldCheck, Award, Clock } from "lucide-react";
 import { Section, Reveal, SectionHeader, Eyebrow } from "@/components/primitives";
@@ -7,12 +8,22 @@ import { SITE, COURSES, FAQS } from "@/lib/site";
 import { ParallaxCard } from "@/components/ParallaxCard";
 import { Magnetic } from "@/components/MagneticButton";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
-import { CommerceStaircase } from "@/components/CommerceStaircase";
-import { RocketLaunch } from "@/components/RocketLaunch";
 import { AnnouncementsStrip } from "@/components/AnnouncementsStrip";
 import { AmbientOrbs } from "@/components/AmbientOrbs";
-import { ConversationCTA } from "@/components/ConversationCTA";
+import { DeferredMount } from "@/components/DeferredMount";
 import shivSir from "@/assets/shiv-sir-new.png.asset.json";
+
+// Below-the-fold heavy chunks — split out of the main bundle.
+const CommerceStaircase = lazy(() =>
+  import("@/components/CommerceStaircase").then((m) => ({ default: m.CommerceStaircase })),
+);
+const RocketLaunch = lazy(() =>
+  import("@/components/RocketLaunch").then((m) => ({ default: m.RocketLaunch })),
+);
+const ConversationCTA = lazy(() =>
+  import("@/components/ConversationCTA").then((m) => ({ default: m.ConversationCTA })),
+);
+
 
 const SITE_URL = "https://shivkumar-classes.lovable.app";
 const OG_IMAGE = "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/98d2bb86-c438-4bdb-af64-77d6a07fe423";
@@ -33,7 +44,12 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: "Shiv Sir's Education Hub — Best Commerce Coaching in Nagpur" },
       { name: "twitter:description", content: "Trusted commerce coaching in Nagpur. 5.0 Google rating. Book a free demo." },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
+      { rel: "preconnect", href: "https://www.google.com" },
+      { rel: "dns-prefetch", href: "https://www.google.com" },
+    ],
+
     scripts: [
       {
         type: "application/ld+json",
@@ -184,7 +200,16 @@ function Home() {
             >
               <div className="absolute -inset-5 rounded-[2.5rem] gradient-lavender opacity-30 blur-2xl" />
               <div className="relative aspect-[4/5] rounded-[2rem] ring-1 ring-border shadow-luxe overflow-hidden">
-                <img src={shivSir.url} alt="Shiv Sir — Founder of Education Hub" className="absolute inset-0 h-full w-full object-cover object-top" />
+                <img
+                  src={shivSir.url}
+                  alt="Shiv Sir — Founder of Education Hub"
+                  width={800}
+                  height={1000}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                />
+
                 <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border px-4 py-3 shadow-soft">
                   <div className="text-[10px] uppercase tracking-[0.25em] text-luxury font-bold">Founder & Mentor</div>
                   <div className="font-display text-xl font-extrabold uppercase tracking-wide">Shiv Kumar Dubey</div>
@@ -281,7 +306,11 @@ function Home() {
           {/* Climbing staircase: Learn → Practice → Test → Improve → Succeed */}
           <Reveal>
             <div className="mt-16 text-[11px] uppercase tracking-[0.3em] text-luxury">The Five-Step Climb</div>
-            <CommerceStaircase />
+            <DeferredMount minHeight={280}>
+              <Suspense fallback={<div style={{ minHeight: 280 }} />}>
+                <CommerceStaircase />
+              </Suspense>
+            </DeferredMount>
           </Reveal>
         </div>
       </section>
@@ -293,8 +322,13 @@ function Home() {
           title={<>The <span className="gold-text">launch sequence</span> of every commerce career</>}
           subtitle="Scroll — and watch the rocket of growth take off."
         />
-        <RocketLaunch />
+        <DeferredMount minHeight={480}>
+          <Suspense fallback={<div style={{ minHeight: 480 }} />}>
+            <RocketLaunch />
+          </Suspense>
+        </DeferredMount>
       </Section>
+
 
       {/* PREMIUM ASSURANCE STRIP */}
       <Section className="overflow-hidden">
@@ -353,20 +387,27 @@ function Home() {
           </Reveal>
           <Reveal className="lg:col-span-3" delay={0.1}>
             <div className="rounded-3xl overflow-hidden ring-1 ring-border shadow-luxe aspect-[16/11] lg:aspect-auto lg:h-full bg-white">
-              <iframe
-                src={SITE.mapsEmbed}
-                className="w-full h-full"
-                loading="lazy"
-                title="Shiv Sir's Education Hub Location"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              <DeferredMount className="h-full" minHeight="100%">
+                <iframe
+                  src={SITE.mapsEmbed}
+                  className="w-full h-full"
+                  loading="lazy"
+                  title="Shiv Sir's Education Hub Location on Google Maps"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </DeferredMount>
             </div>
           </Reveal>
         </div>
       </Section>
 
       {/* CONVERSATIONAL CTA */}
-      <ConversationCTA />
+      <DeferredMount minHeight={320}>
+        <Suspense fallback={<div style={{ minHeight: 320 }} />}>
+          <ConversationCTA />
+        </Suspense>
+      </DeferredMount>
+
 
       {/* FINAL CTA */}
       <Section>

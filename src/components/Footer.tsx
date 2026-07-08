@@ -11,7 +11,7 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-full bg-black grid place-items-center overflow-hidden ring-1 ring-luxury/40">
-              <img src={ehLogo.url} alt="Shiv Sir's Education Hub" className="h-full w-full object-contain" />
+              <img src={ehLogo.url} alt="Shiv Sir's Education Hub" width={48} height={48} loading="lazy" decoding="async" className="h-full w-full object-contain" />
             </div>
             <div>
               <div className="font-display text-lg">Shiv Sir's</div>
@@ -87,8 +87,13 @@ export function Footer() {
             <img
               src={agencyLogo.url}
               alt={SITE.agency}
+              width={144}
+              height={144}
+              loading="lazy"
+              decoding="async"
               className="h-28 w-28 md:h-36 md:w-36 object-contain drop-shadow-[0_0_18px_rgba(198,169,105,0.55)]"
             />
+
           </a>
         </div>
       </div>
