@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Star, ArrowRight, MessageCircle, BookOpen, Trophy, Users, Sparkles, GraduationCap, CheckCircle2, MapPin, Phone, ShieldCheck, Award, Clock } from "lucide-react";
 import { Section, Reveal, SectionHeader, Eyebrow } from "@/components/primitives";
@@ -7,12 +8,22 @@ import { SITE, COURSES, FAQS } from "@/lib/site";
 import { ParallaxCard } from "@/components/ParallaxCard";
 import { Magnetic } from "@/components/MagneticButton";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
-import { CommerceStaircase } from "@/components/CommerceStaircase";
-import { RocketLaunch } from "@/components/RocketLaunch";
 import { AnnouncementsStrip } from "@/components/AnnouncementsStrip";
 import { AmbientOrbs } from "@/components/AmbientOrbs";
-import { ConversationCTA } from "@/components/ConversationCTA";
+import { DeferredMount } from "@/components/DeferredMount";
 import shivSir from "@/assets/shiv-sir-new.png.asset.json";
+
+// Below-the-fold heavy chunks — split out of the main bundle.
+const CommerceStaircase = lazy(() =>
+  import("@/components/CommerceStaircase").then((m) => ({ default: m.CommerceStaircase })),
+);
+const RocketLaunch = lazy(() =>
+  import("@/components/RocketLaunch").then((m) => ({ default: m.RocketLaunch })),
+);
+const ConversationCTA = lazy(() =>
+  import("@/components/ConversationCTA").then((m) => ({ default: m.ConversationCTA })),
+);
+
 
 const SITE_URL = "https://shivkumar-classes.lovable.app";
 const OG_IMAGE = "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/98d2bb86-c438-4bdb-af64-77d6a07fe423";
