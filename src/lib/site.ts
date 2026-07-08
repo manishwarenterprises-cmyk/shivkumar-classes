@@ -22,14 +22,12 @@ export const NAV = [
   { to: "/about", label: "About" },
   { to: "/courses", label: "Courses" },
   { to: "/results", label: "Results" },
-  { to: "/testimonials", label: "Testimonials" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/blog", label: "Blog" },
   { to: "/admission", label: "Admission" },
   { to: "/fees", label: "Fees" },
   { to: "/locations", label: "Locations" },
   { to: "/contact", label: "Contact" },
 ] as const;
+
 
 
 export const COURSES = [
