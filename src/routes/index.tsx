@@ -200,7 +200,16 @@ function Home() {
             >
               <div className="absolute -inset-5 rounded-[2.5rem] gradient-lavender opacity-30 blur-2xl" />
               <div className="relative aspect-[4/5] rounded-[2rem] ring-1 ring-border shadow-luxe overflow-hidden">
-                <img src={shivSir.url} alt="Shiv Sir — Founder of Education Hub" className="absolute inset-0 h-full w-full object-cover object-top" />
+                <img
+                  src={shivSir.url}
+                  alt="Shiv Sir — Founder of Education Hub"
+                  width={800}
+                  height={1000}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                />
+
                 <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 backdrop-blur ring-1 ring-border px-4 py-3 shadow-soft">
                   <div className="text-[10px] uppercase tracking-[0.25em] text-luxury font-bold">Founder & Mentor</div>
                   <div className="font-display text-xl font-extrabold uppercase tracking-wide">Shiv Kumar Dubey</div>
