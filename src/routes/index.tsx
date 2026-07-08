@@ -1,33 +1,97 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Star, ArrowRight, MessageCircle, BookOpen, Trophy, Users, Sparkles, GraduationCap, CheckCircle2, MapPin, Phone } from "lucide-react";
+import { Star, ArrowRight, MessageCircle, BookOpen, Trophy, Users, Sparkles, GraduationCap, CheckCircle2, MapPin, Phone, ShieldCheck, Award, Clock } from "lucide-react";
 import { Section, Reveal, SectionHeader, Eyebrow } from "@/components/primitives";
 import { Counter, FloatingParticles } from "@/components/Counter";
-import { SITE, COURSES, TESTIMONIALS } from "@/lib/site";
+import { SITE, COURSES, FAQS } from "@/lib/site";
 import { ParallaxCard } from "@/components/ParallaxCard";
 import { Magnetic } from "@/components/MagneticButton";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { CommerceStaircase } from "@/components/CommerceStaircase";
 import { RocketLaunch } from "@/components/RocketLaunch";
-import { CertificateCard } from "@/components/CertificateCard";
 import { AnnouncementsStrip } from "@/components/AnnouncementsStrip";
 import { AmbientOrbs } from "@/components/AmbientOrbs";
 import { ConversationCTA } from "@/components/ConversationCTA";
 import shivSir from "@/assets/shiv-sir-new.png.asset.json";
 
+const SITE_URL = "https://shivkumar-classes.lovable.app";
+const OG_IMAGE = "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/98d2bb86-c438-4bdb-af64-77d6a07fe423";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Shiv Sir's Education Hub — Premier Commerce Coaching in Nagpur" },
-      { name: "description", content: "Trusted commerce coaching for 11th, 12th, B.Com and BBA in Nagpur. 5.0 Google rating, 13+ years building commerce leaders." },
-      { property: "og:title", content: "Shiv Sir's Education Hub — Commerce Coaching in Nagpur" },
-      { property: "og:description", content: "Book a free demo class today." },
+      { title: "Shiv Sir's Education Hub — Best Commerce Coaching in Nagpur | 11th, 12th, B.Com, BBA" },
+      { name: "description", content: "Nagpur's top-rated commerce coaching for 11th, 12th, B.Com and BBA. 5.0 Google rating, 62+ reviews, 13+ years of results. Book a free demo class today." },
+      { name: "keywords", content: "commerce coaching Nagpur, 11th commerce classes Nagpur, 12th commerce coaching Nagpur, B.Com tuition Nagpur, BBA coaching Nagpur, accountancy classes Wadi, Shiv Sir Education Hub" },
+      { property: "og:title", content: "Shiv Sir's Education Hub — Best Commerce Coaching in Nagpur" },
+      { property: "og:description", content: "Trusted commerce coaching for 11th, 12th, B.Com and BBA. 5.0 Google rating. Book a free demo class." },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
+      { name: "twitter:title", content: "Shiv Sir's Education Hub — Best Commerce Coaching in Nagpur" },
+      { name: "twitter:description", content: "Trusted commerce coaching in Nagpur. 5.0 Google rating. Book a free demo." },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "EducationalOrganization",
+          "@id": `${SITE_URL}/#organization`,
+          name: "Shiv Sir's Education Hub",
+          alternateName: "Shiv Kumar Classes",
+          url: SITE_URL,
+          logo: OG_IMAGE,
+          image: OG_IMAGE,
+          telephone: SITE.phone,
+          email: SITE.email,
+          foundingDate: "2012",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Balaji Complex, Near Blue Bells Convent School, Duttawadi, Wadi",
+            addressLocality: "Nagpur",
+            addressRegion: "Maharashtra",
+            postalCode: "440023",
+            addressCountry: "IN",
+          },
+          areaServed: { "@type": "City", name: "Nagpur" },
+          aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "62", bestRating: "5" },
+          sameAs: [`https://wa.me/${SITE.whatsapp}`],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.slice(0, 6).map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          itemListElement: COURSES.map((c, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            url: `${SITE_URL}/courses/${c.slug}`,
+            name: c.title,
+          })),
+        }),
+      },
+    ],
   }),
   component: Home,
 });
+
 
 function Home() {
   return (
