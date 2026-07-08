@@ -387,20 +387,27 @@ function Home() {
           </Reveal>
           <Reveal className="lg:col-span-3" delay={0.1}>
             <div className="rounded-3xl overflow-hidden ring-1 ring-border shadow-luxe aspect-[16/11] lg:aspect-auto lg:h-full bg-white">
-              <iframe
-                src={SITE.mapsEmbed}
-                className="w-full h-full"
-                loading="lazy"
-                title="Shiv Sir's Education Hub Location"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              <DeferredMount className="h-full" minHeight="100%">
+                <iframe
+                  src={SITE.mapsEmbed}
+                  className="w-full h-full"
+                  loading="lazy"
+                  title="Shiv Sir's Education Hub Location on Google Maps"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </DeferredMount>
             </div>
           </Reveal>
         </div>
       </Section>
 
       {/* CONVERSATIONAL CTA */}
-      <ConversationCTA />
+      <DeferredMount minHeight={320}>
+        <Suspense fallback={<div style={{ minHeight: 320 }} />}>
+          <ConversationCTA />
+        </Suspense>
+      </DeferredMount>
+
 
       {/* FINAL CTA */}
       <Section>
