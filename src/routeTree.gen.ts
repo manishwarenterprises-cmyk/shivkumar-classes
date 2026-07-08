@@ -9,26 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResultsRouteImport } from './routes/results'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as LocationsRouteImport } from './routes/locations'
-import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FeesRouteImport } from './routes/fees'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DownloadsRouteImport } from './routes/downloads'
 import { Route as CoursesRouteImport } from './routes/courses'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareersRouteImport } from './routes/careers'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdmissionRouteImport } from './routes/admission'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AuthenticatedStoreRouteImport } from './routes/_authenticated/store'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedMyPurchasesRouteImport } from './routes/_authenticated/my-purchases'
@@ -43,11 +39,6 @@ import { Route as AuthenticatedAdminAnnouncementsRouteImport } from './routes/_a
 import { Route as AuthenticatedStoreCourseSubjectRouteImport } from './routes/_authenticated/store.$course.$subject'
 import { Route as AuthenticatedStoreCourseSubjectChapterRouteImport } from './routes/_authenticated/store.$course.$subject.$chapter'
 
-const TestimonialsRoute = TestimonialsRouteImport.update({
-  id: '/testimonials',
-  path: '/testimonials',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -66,11 +57,6 @@ const ResourcesRoute = ResourcesRouteImport.update({
 const LocationsRoute = LocationsRouteImport.update({
   id: '/locations',
   path: '/locations',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GalleryRoute = GalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeesRoute = FeesRouteImport.update({
@@ -103,11 +89,6 @@ const CareersRoute = CareersRouteImport.update({
   path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -136,11 +117,6 @@ const CoursesSlugRoute = CoursesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => CoursesRoute,
-} as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
 } as any)
 const AuthenticatedStoreRoute = AuthenticatedStoreRouteImport.update({
   id: '/store',
@@ -219,26 +195,22 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
   '/fees': typeof FeesRoute
-  '/gallery': typeof GalleryRoute
   '/locations': typeof LocationsRoute
   '/resources': typeof ResourcesRoute
   '/results': typeof ResultsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/testimonials': typeof TestimonialsRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/learn': typeof AuthenticatedLearnRouteWithChildren
   '/my-purchases': typeof AuthenticatedMyPurchasesRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/store': typeof AuthenticatedStoreRouteWithChildren
-  '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/courses': typeof AuthenticatedAdminCoursesRoute
@@ -253,26 +225,22 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
   '/fees': typeof FeesRoute
-  '/gallery': typeof GalleryRoute
   '/locations': typeof LocationsRoute
   '/resources': typeof ResourcesRoute
   '/results': typeof ResultsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/testimonials': typeof TestimonialsRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/learn': typeof AuthenticatedLearnRouteWithChildren
   '/my-purchases': typeof AuthenticatedMyPurchasesRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/store': typeof AuthenticatedStoreRouteWithChildren
-  '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/admin/courses': typeof AuthenticatedAdminCoursesRoute
@@ -289,26 +257,22 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
   '/auth': typeof AuthRoute
-  '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRoute
   '/contact': typeof ContactRoute
   '/courses': typeof CoursesRouteWithChildren
   '/downloads': typeof DownloadsRoute
   '/faq': typeof FaqRoute
   '/fees': typeof FeesRoute
-  '/gallery': typeof GalleryRoute
   '/locations': typeof LocationsRoute
   '/resources': typeof ResourcesRoute
   '/results': typeof ResultsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/testimonials': typeof TestimonialsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/learn': typeof AuthenticatedLearnRouteWithChildren
   '/_authenticated/my-purchases': typeof AuthenticatedMyPurchasesRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/store': typeof AuthenticatedStoreRouteWithChildren
-  '/blog/$slug': typeof BlogSlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/_authenticated/admin/announcements': typeof AuthenticatedAdminAnnouncementsRoute
   '/_authenticated/admin/courses': typeof AuthenticatedAdminCoursesRoute
@@ -325,26 +289,22 @@ export interface FileRouteTypes {
     | '/about'
     | '/admission'
     | '/auth'
-    | '/blog'
     | '/careers'
     | '/contact'
     | '/courses'
     | '/downloads'
     | '/faq'
     | '/fees'
-    | '/gallery'
     | '/locations'
     | '/resources'
     | '/results'
     | '/sitemap.xml'
-    | '/testimonials'
     | '/admin'
     | '/dashboard'
     | '/learn'
     | '/my-purchases'
     | '/profile'
     | '/store'
-    | '/blog/$slug'
     | '/courses/$slug'
     | '/admin/announcements'
     | '/admin/courses'
@@ -359,26 +319,22 @@ export interface FileRouteTypes {
     | '/about'
     | '/admission'
     | '/auth'
-    | '/blog'
     | '/careers'
     | '/contact'
     | '/courses'
     | '/downloads'
     | '/faq'
     | '/fees'
-    | '/gallery'
     | '/locations'
     | '/resources'
     | '/results'
     | '/sitemap.xml'
-    | '/testimonials'
     | '/admin'
     | '/dashboard'
     | '/learn'
     | '/my-purchases'
     | '/profile'
     | '/store'
-    | '/blog/$slug'
     | '/courses/$slug'
     | '/admin/announcements'
     | '/admin/courses'
@@ -394,26 +350,22 @@ export interface FileRouteTypes {
     | '/about'
     | '/admission'
     | '/auth'
-    | '/blog'
     | '/careers'
     | '/contact'
     | '/courses'
     | '/downloads'
     | '/faq'
     | '/fees'
-    | '/gallery'
     | '/locations'
     | '/resources'
     | '/results'
     | '/sitemap.xml'
-    | '/testimonials'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/_authenticated/learn'
     | '/_authenticated/my-purchases'
     | '/_authenticated/profile'
     | '/_authenticated/store'
-    | '/blog/$slug'
     | '/courses/$slug'
     | '/_authenticated/admin/announcements'
     | '/_authenticated/admin/courses'
@@ -430,30 +382,20 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdmissionRoute: typeof AdmissionRoute
   AuthRoute: typeof AuthRoute
-  BlogRoute: typeof BlogRouteWithChildren
   CareersRoute: typeof CareersRoute
   ContactRoute: typeof ContactRoute
   CoursesRoute: typeof CoursesRouteWithChildren
   DownloadsRoute: typeof DownloadsRoute
   FaqRoute: typeof FaqRoute
   FeesRoute: typeof FeesRoute
-  GalleryRoute: typeof GalleryRoute
   LocationsRoute: typeof LocationsRoute
   ResourcesRoute: typeof ResourcesRoute
   ResultsRoute: typeof ResultsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  TestimonialsRoute: typeof TestimonialsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/testimonials': {
-      id: '/testimonials'
-      path: '/testimonials'
-      fullPath: '/testimonials'
-      preLoaderRoute: typeof TestimonialsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -480,13 +422,6 @@ declare module '@tanstack/react-router' {
       path: '/locations'
       fullPath: '/locations'
       preLoaderRoute: typeof LocationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gallery': {
-      id: '/gallery'
-      path: '/gallery'
-      fullPath: '/gallery'
-      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fees': {
@@ -531,13 +466,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -579,13 +507,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/courses/$slug'
       preLoaderRoute: typeof CoursesSlugRouteImport
       parentRoute: typeof CoursesRoute
-    }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
     }
     '/_authenticated/store': {
       id: '/_authenticated/store'
@@ -769,16 +690,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
 interface CoursesRouteChildren {
   CoursesSlugRoute: typeof CoursesSlugRoute
 }
@@ -796,19 +707,16 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdmissionRoute: AdmissionRoute,
   AuthRoute: AuthRoute,
-  BlogRoute: BlogRouteWithChildren,
   CareersRoute: CareersRoute,
   ContactRoute: ContactRoute,
   CoursesRoute: CoursesRouteWithChildren,
   DownloadsRoute: DownloadsRoute,
   FaqRoute: FaqRoute,
   FeesRoute: FeesRoute,
-  GalleryRoute: GalleryRoute,
   LocationsRoute: LocationsRoute,
   ResourcesRoute: ResourcesRoute,
   ResultsRoute: ResultsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  TestimonialsRoute: TestimonialsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
