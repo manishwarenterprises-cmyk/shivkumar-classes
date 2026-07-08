@@ -306,7 +306,11 @@ function Home() {
           {/* Climbing staircase: Learn → Practice → Test → Improve → Succeed */}
           <Reveal>
             <div className="mt-16 text-[11px] uppercase tracking-[0.3em] text-luxury">The Five-Step Climb</div>
-            <CommerceStaircase />
+            <DeferredMount minHeight={280}>
+              <Suspense fallback={<div style={{ minHeight: 280 }} />}>
+                <CommerceStaircase />
+              </Suspense>
+            </DeferredMount>
           </Reveal>
         </div>
       </section>
@@ -318,8 +322,13 @@ function Home() {
           title={<>The <span className="gold-text">launch sequence</span> of every commerce career</>}
           subtitle="Scroll — and watch the rocket of growth take off."
         />
-        <RocketLaunch />
+        <DeferredMount minHeight={480}>
+          <Suspense fallback={<div style={{ minHeight: 480 }} />}>
+            <RocketLaunch />
+          </Suspense>
+        </DeferredMount>
       </Section>
+
 
       {/* PREMIUM ASSURANCE STRIP */}
       <Section className="overflow-hidden">
