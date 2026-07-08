@@ -87,8 +87,13 @@ export function Footer() {
             <img
               src={agencyLogo.url}
               alt={SITE.agency}
+              width={144}
+              height={144}
+              loading="lazy"
+              decoding="async"
               className="h-28 w-28 md:h-36 md:w-36 object-contain drop-shadow-[0_0_18px_rgba(198,169,105,0.55)]"
             />
+
           </a>
         </div>
       </div>
