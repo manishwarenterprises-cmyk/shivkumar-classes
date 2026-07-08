@@ -15,7 +15,7 @@ export function DeferredMount({
   children: ReactNode;
   rootMargin?: string;
   minHeight?: number | string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
