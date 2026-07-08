@@ -120,8 +120,9 @@ export const adminListItems = createServerFn({ method: "GET" })
   .inputValidator((d) => z.object({ chapterId: z.string().uuid() }).parse(d))
   .handler(async ({ context, data }) => {
     await assertStaff(context);
-    const { data: rows, error } = await context.supabase
-      .rpc("admin_list_store_items", { _chapter_id: data.chapterId });
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: rows, error } = await supabaseAdmin
+      .rpc("admin_list_store_items", { _user_id: context.userId, _chapter_id: data.chapterId });
     if (error) throw new Error(error.message);
     return (rows ?? []) as any[];
   });

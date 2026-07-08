@@ -200,8 +200,9 @@ export const unlockItemContent = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ itemId: z.string().uuid() }).parse(d))
   .handler(async ({ context, data }) => {
-    const { data: rows, error } = await context.supabase
-      .rpc("get_store_item_content", { _item_id: data.itemId });
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: rows, error } = await supabaseAdmin
+      .rpc("get_store_item_content", { _user_id: context.userId, _item_id: data.itemId });
     if (error) throw new Error(error.message);
     const r = (rows as any[])?.[0];
     if (!r) throw new Error("No content available");
