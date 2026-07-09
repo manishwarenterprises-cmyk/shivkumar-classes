@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Hard-pin the Vercel preset for self-hosted deploys on Vercel.
+  // Inside a Lovable build this override is ignored and Cloudflare is used.
+  nitro: {
+    preset: "vercel",
+  },
 });
